@@ -1,0 +1,7 @@
+### CREATE CATEGORY
+POST localhost:8080/category/create
+Content-Type: application/json
+
+{
+  "name": "For you"
+}
