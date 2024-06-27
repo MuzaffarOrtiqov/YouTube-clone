@@ -5,3 +5,17 @@ Content-Type: application/json
 {
   "name": "For you"
 }
+
+### UPDATE CATEGORY
+PUT localhost:8080/category/update/1
+Content-Type: application/json
+
+{
+  "name": "For you"
+}
+
+### DELETE CATEGORY
+DELETE localhost:8080/category/delete/5
+
+### GET ALL CATEGORIES
+GET localhost:8080/category/all-categories
