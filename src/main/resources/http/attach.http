@@ -1,0 +1,19 @@
+POST localhost:8080/attach/upload
+Content-Type:multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="testvideo.mp4"
+
+< C:\Users\HP\Desktop\test\testvideo.mp4
+
+### LOAD FILE
+GET localhost:8080/attach/open/e53765af-1bd0-46b2-b5fd-a78ef2909a6f.mp4
+
+### DOWNLOAD A FILE
+GET localhost:8080/attach/download/77e6c258-4b2a-4f05-bd6b-280458387e9a.jpg
+
+###PAGINATION
+POST localhost:8080/attach/pagination
+
+### DELETE
+DELETE localhost:8080/attach/delete/de4bdbd1-801e-41ff-be45-c13858362953.mp4
