@@ -2,13 +2,12 @@ package uz.urinov.youtube.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uz.urinov.youtube.dto.CategoryDTO;
-import uz.urinov.youtube.dto.CategoryUpdateDTO;
+import uz.urinov.youtube.dto.category.CategoryDTO;
+import uz.urinov.youtube.dto.category.CategoryUpdateDTO;
 import uz.urinov.youtube.entity.CategoryEntity;
 import uz.urinov.youtube.exp.AppBadException;
 import uz.urinov.youtube.repository.CategoryRepository;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 

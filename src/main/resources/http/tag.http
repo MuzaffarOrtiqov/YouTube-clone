@@ -1,0 +1,21 @@
+### CREATE TAG
+POST localhost:8080/tag/create
+Content-Type: application/json
+
+{
+  "name": "#super"
+}
+
+### UPDATE TAG
+PUT localhost:8080/tag/update/1
+Content-Type: application/json
+
+{
+  "name": "#supper"
+}
+
+### UPDATE TAG
+DELETE localhost:8080/tag/delete?id=1
+
+### GET ALL TAGS
+GET localhost:8080/tag/all-tags

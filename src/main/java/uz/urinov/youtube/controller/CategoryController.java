@@ -4,8 +4,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.urinov.youtube.dto.CategoryDTO;
-import uz.urinov.youtube.dto.CategoryUpdateDTO;
+import uz.urinov.youtube.dto.category.CategoryDTO;
+import uz.urinov.youtube.dto.category.CategoryUpdateDTO;
 import uz.urinov.youtube.service.CategoryService;
 
 import java.util.List;
