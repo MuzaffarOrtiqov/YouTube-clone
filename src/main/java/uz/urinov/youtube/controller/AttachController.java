@@ -1,5 +1,6 @@
 package uz.urinov.youtube.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -7,11 +8,12 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import uz.urinov.youtube.dto.attach.AttachDTO;
 import uz.urinov.youtube.service.AttachService;
-
+@Slf4j
 @RequestMapping("/attach")
 @RestController
 public class AttachController {
@@ -19,6 +21,7 @@ public class AttachController {
     private AttachService attachService;
 
     @PostMapping("/upload")
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     public ResponseEntity<AttachDTO> upload(@RequestParam("file") MultipartFile file) {
         AttachDTO response = attachService.saveAttach(file);
         return ResponseEntity.ok(response);
