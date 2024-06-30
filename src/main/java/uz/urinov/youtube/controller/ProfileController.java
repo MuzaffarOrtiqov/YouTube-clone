@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import uz.urinov.youtube.dto.ProfileCreateDTO;
 import uz.urinov.youtube.dto.ProfileResponseDTO;
 import uz.urinov.youtube.dto.ProfileUpdateDto;
@@ -40,6 +41,13 @@ public class ProfileController {
     @PutMapping("/updateDetail")
     public ResponseEntity<Result> updateDetail(@RequestBody ProfileUpdateDto profileUpdateDto) {
         Result result = profileService.updateDetail(profileUpdateDto);
+        return ResponseEntity.status(result.isSuccess() ? 200 : 409).body(result);
+    }
+
+    // 4. Update Profile Attach (main_photo) (delete old attach)
+    @PostMapping("/updateProfilePhoto")
+    public ResponseEntity<Result> updateProfilePhoto(@RequestParam("file") MultipartFile file) {
+        Result result = profileService.updateProfilePhoto(file);
         return ResponseEntity.status(result.isSuccess() ? 200 : 409).body(result);
     }
 

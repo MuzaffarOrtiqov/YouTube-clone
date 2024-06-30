@@ -1,17 +1,16 @@
 package uz.urinov.youtube.service;
 
-import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import uz.urinov.youtube.dto.ProfileCreateDTO;
 import uz.urinov.youtube.dto.ProfileResponseDTO;
 import uz.urinov.youtube.dto.ProfileUpdateDto;
+import uz.urinov.youtube.dto.attach.AttachDTO;
 import uz.urinov.youtube.entity.ProfileEntity;
 import uz.urinov.youtube.exp.AppBadException;
 import uz.urinov.youtube.repository.ProfileRepository;
@@ -29,6 +28,8 @@ public class ProfileService {
     private ProfileRepository profileRepository;
     @Autowired
     private AuthService authService;
+    @Autowired
+    private AttachService attachService;
 
     //	1. Change password
     public Result changePassword(String oldPassword, String newPassword) {
@@ -67,6 +68,17 @@ public class ProfileService {
         return new Result("Profile updated", true);
     }
 
+    // 4. Update Profile Attach (main_photo) (delete old attach) 2
+    public Result updateProfilePhoto(MultipartFile file) {
+        AttachDTO attachDTO = attachService.saveAttach(file);
+        ProfileEntity profileEntity = SecurityUtil.getProfile();
+        if (profileEntity.getPhotoId()!=null){
+            attachService.delete(profileEntity.getPhotoId());
+        }
+        profileEntity.setPhotoId(attachDTO.getId());
+        profileRepository.save(profileEntity);
+        return new Result("Profile updated", true);
+    }
 
     // 5. Get Profile Detail (id,name,surname,email,main_photo((url)))
     public PageImpl<ProfileResponseDTO> getProfilePage(int page, int size) {

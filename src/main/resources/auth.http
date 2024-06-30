@@ -27,9 +27,9 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk0NjE5MzIsImlkIjoxLCJ1c
 ### Profile update name, surname
 PUT http://localhost:8080/profile/updateDetail
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk0NjM3NzIsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX1VTRVIiLCJleHAiOjE3MTk1NTAxNzIsImlzcyI6Ikt1blV6VGVzdCJ9.rk3SidpnaEuNHyRXUyvRMjfWXhApp7fzZS-ezUnMwYwcijWZaJew-Xf5wpFzAsoNSG91YoED1e31tvCK5Gm11A
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk3MjM0NjksImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX1VTRVIiLCJleHAiOjE3MTk4MDk4NjksImlzcyI6Ikt1blV6VGVzdCJ9.7Imh4VhpSKiCe7uuCnY6LZkBhvQiJoiDcd-T86uX0oYY3c_xbteRnsux0-S6Kej8EJz7T01U85sZEtgTr8EgsQ
 
 {
-  "name": "Ali",
+  "name": "Alijon",
   "surname": ""
 }
