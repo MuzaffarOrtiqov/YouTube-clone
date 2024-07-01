@@ -1,6 +1,7 @@
 ### CREATE TAG
 POST localhost:8080/tag/create
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk4MjMxNTUsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTk5MDk1NTUsImlzcyI6Ikt1blV6VGVzdCJ9.MBOi6b6hW3jvi6QbpX7qz4u4cjVLKgGHllL5yQVk_U_d0UyBoE77uk8538dPyTm5Ry7yL1Y0KGsow2NHwry02A
 
 {
   "name": "#super"
@@ -9,6 +10,7 @@ Content-Type: application/json
 ### UPDATE TAG
 PUT localhost:8080/tag/update/1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk4MjMxNTUsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTk5MDk1NTUsImlzcyI6Ikt1blV6VGVzdCJ9.MBOi6b6hW3jvi6QbpX7qz4u4cjVLKgGHllL5yQVk_U_d0UyBoE77uk8538dPyTm5Ry7yL1Y0KGsow2NHwry02A
 
 {
   "name": "#supper"
@@ -16,6 +18,8 @@ Content-Type: application/json
 
 ### UPDATE TAG
 DELETE localhost:8080/tag/delete?id=1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk4MjMxNTUsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTk5MDk1NTUsImlzcyI6Ikt1blV6VGVzdCJ9.MBOi6b6hW3jvi6QbpX7qz4u4cjVLKgGHllL5yQVk_U_d0UyBoE77uk8538dPyTm5Ry7yL1Y0KGsow2NHwry02A
 
 ### GET ALL TAGS
 GET localhost:8080/tag/all-tags
+

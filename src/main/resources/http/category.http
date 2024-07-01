@@ -1,21 +1,25 @@
 ### CREATE CATEGORY
-POST localhost:8080/category/create
+POST localhost:8080/category/adm/create
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk4MjMxNTUsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTk5MDk1NTUsImlzcyI6Ikt1blV6VGVzdCJ9.MBOi6b6hW3jvi6QbpX7qz4u4cjVLKgGHllL5yQVk_U_d0UyBoE77uk8538dPyTm5Ry7yL1Y0KGsow2NHwry02A
 
 {
   "name": "For you"
 }
 
 ### UPDATE CATEGORY
-PUT localhost:8080/category/update/1
+PUT localhost:8080/category/adm/update/1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk4MjMxNTUsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTk5MDk1NTUsImlzcyI6Ikt1blV6VGVzdCJ9.MBOi6b6hW3jvi6QbpX7qz4u4cjVLKgGHllL5yQVk_U_d0UyBoE77uk8538dPyTm5Ry7yL1Y0KGsow2NHwry02A
 
 {
   "name": "For you"
 }
 
 ### DELETE CATEGORY
-DELETE localhost:8080/category/delete/5
+DELETE localhost:8080/category/adm/delete/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk4MjMxNTUsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTk5MDk1NTUsImlzcyI6Ikt1blV6VGVzdCJ9.MBOi6b6hW3jvi6QbpX7qz4u4cjVLKgGHllL5yQVk_U_d0UyBoE77uk8538dPyTm5Ry7yL1Y0KGsow2NHwry02A
 
 ### GET ALL CATEGORIES
 GET localhost:8080/category/all-categories
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk4MjMxNTUsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTk5MDk1NTUsImlzcyI6Ikt1blV6VGVzdCJ9.MBOi6b6hW3jvi6QbpX7qz4u4cjVLKgGHllL5yQVk_U_d0UyBoE77uk8538dPyTm5Ry7yL1Y0KGsow2NHwry02A
