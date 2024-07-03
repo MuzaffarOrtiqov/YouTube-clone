@@ -1,0 +1,71 @@
+
+
+### 1.Channel create
+POST http://localhost:8080/channel/create
+Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwMDU1MjUsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMDkxOTI1LCJpc3MiOiJLdW5VelRlc3QifQ.p6xjh72OUheyM9SF3LR0GGc4aPVxIbZlumaIWDE3kinGGzMUGdVKeGcHdevIuuqT6uxnGlioslwvQdjhJyKMNw
+Content-Type: application/json
+
+{
+  "name": "Math",
+  "description": "Matematika asoslari",
+  "bannerId": null,
+  "photoId": null
+}
+
+
+### 2.Channel update
+PUT http://localhost:8080/channel/update/a421c930-a734-4685-9366-ca19454300b7
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwMDU1MjUsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMDkxOTI1LCJpc3MiOiJLdW5VelRlc3QifQ.p6xjh72OUheyM9SF3LR0GGc4aPVxIbZlumaIWDE3kinGGzMUGdVKeGcHdevIuuqT6uxnGlioslwvQdjhJyKMNw
+
+{
+  "name": "Java",
+  "description": "backend"
+}
+
+### 3.Channel photo update
+PUT http://localhost:8080/channel/photo/a421c930-a734-4685-9366-ca19454300b7
+Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwMDE5OTAsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMDg4MzkwLCJpc3MiOiJLdW5VelRlc3QifQ.pS0iOiURJk59fBCCmhwwcFa3MxC27s517_9ZHjUBZBgJUuzsn5eckhRv_4J8u9EIC520Qm-SB9Sw_UfjLmxCvw
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="photo"; filename="Mansurjon.jpg"
+
+< C:\Users\Urinov Shokirjon\Desktop\Mansurjon.jpg
+
+
+### 4.Channel banner update
+PUT http://localhost:8080/channel/banner/a421c930-a734-4685-9366-ca19454300b7
+Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwMDE5OTAsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMDg4MzkwLCJpc3MiOiJLdW5VelRlc3QifQ.pS0iOiURJk59fBCCmhwwcFa3MxC27s517_9ZHjUBZBgJUuzsn5eckhRv_4J8u9EIC520Qm-SB9Sw_UfjLmxCvw
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="banner"; filename="Test.png"
+
+< C:\Users\Urinov Shokirjon\Desktop\Test.png
+
+###  5. Channel Pagination (ADMIN)
+POST http://localhost:8080/channel/adm/pagination
+Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwMDY0MzgsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwMDkyODM4LCJpc3MiOiJLdW5VelRlc3QifQ.8wVVpcJ7F7V1ormsXADmFSs7_0mb-qdohCcki1Hq-zLX8OTu1EjWGxP8IQQjFaEMRh6gfWjqiQd4BT6EWDaHfQ
+Content-Type: application/x-www-form-urlencoded
+
+    page=1&
+    size=2
+
+### 6. Get Channel By Id
+PUT http://localhost:8080/channel/get-channel/a421c930-a734-4685-9366-ca19454300b7
+Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwMDE5OTAsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMDg4MzkwLCJpc3MiOiJLdW5VelRlc3QifQ.pS0iOiURJk59fBCCmhwwcFa3MxC27s517_9ZHjUBZBgJUuzsn5eckhRv_4J8u9EIC520Qm-SB9Sw_UfjLmxCvw
+Content-Type: application/x-www-form-urlencoded
+
+### 7. Change Channel Status (ADMIN,USER and OWNER)
+PUT http://localhost:8080/channel/channel-status
+Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwMDY0MzgsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwMDkyODM4LCJpc3MiOiJLdW5VelRlc3QifQ.8wVVpcJ7F7V1ormsXADmFSs7_0mb-qdohCcki1Hq-zLX8OTu1EjWGxP8IQQjFaEMRh6gfWjqiQd4BT6EWDaHfQ
+Content-Type: application/x-www-form-urlencoded
+
+channelId = a421c930-a734-4685-9366-ca19454300b7 &
+status = ACTIVE
+
+### 8. User Channel List (murojat qilgan userni)
+GET http://localhost:8080/channel/channel-list
+Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwMDE5OTAsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMDg4MzkwLCJpc3MiOiJLdW5VelRlc3QifQ.pS0iOiURJk59fBCCmhwwcFa3MxC27s517_9ZHjUBZBgJUuzsn5eckhRv_4J8u9EIC520Qm-SB9Sw_UfjLmxCvw
+

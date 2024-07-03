@@ -1,4 +1,4 @@
-package uz.urinov.youtube.dto;
+package uz.urinov.youtube.dto.profile;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

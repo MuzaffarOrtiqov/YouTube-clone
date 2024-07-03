@@ -1,4 +1,4 @@
-package uz.urinov.youtube.dto;
+package uz.urinov.youtube.dto.profile;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

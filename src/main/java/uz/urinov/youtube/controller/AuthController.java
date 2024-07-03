@@ -6,9 +6,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.urinov.youtube.dto.LoginDto;
-import uz.urinov.youtube.dto.ProfileCreateDTO;
-import uz.urinov.youtube.dto.ProfileResponseDTO;
+import uz.urinov.youtube.dto.auth.LoginDto;
+import uz.urinov.youtube.dto.profile.ProfileCreateDTO;
+import uz.urinov.youtube.dto.profile.ProfileResponseDTO;
 import uz.urinov.youtube.service.AuthService;
 import uz.urinov.youtube.util.Result;
 

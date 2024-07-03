@@ -1,4 +1,4 @@
-package uz.urinov.youtube.dto;
+package uz.urinov.youtube.dto.auth;
 
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;

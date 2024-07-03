@@ -8,9 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import uz.urinov.youtube.dto.ProfileCreateDTO;
-import uz.urinov.youtube.dto.ProfileResponseDTO;
-import uz.urinov.youtube.dto.ProfileUpdateDto;
+import uz.urinov.youtube.dto.profile.ProfileCreateDTO;
+import uz.urinov.youtube.dto.profile.ProfileResponseDTO;
+import uz.urinov.youtube.dto.profile.ProfileUpdateDto;
 import uz.urinov.youtube.service.ProfileService;
 import uz.urinov.youtube.util.Result;
 
