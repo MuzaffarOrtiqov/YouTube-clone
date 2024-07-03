@@ -59,6 +59,8 @@ public class SecurityConfig {
                             .requestMatchers("/profile/adm/**").hasRole("ADMIN")
                             .requestMatchers("/category/adm/**").hasRole("ADMIN")
                             .requestMatchers("/channel/adm/**").hasRole("ADMIN")
+                            .requestMatchers("/category/all-categories").permitAll()
+                            .requestMatchers("/tag/all-tags").permitAll()
 
                             .anyRequest()
                             .authenticated();

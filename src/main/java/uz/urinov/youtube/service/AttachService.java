@@ -1,6 +1,7 @@
 package uz.urinov.youtube.service;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -18,16 +19,17 @@ import uz.urinov.youtube.entity.AttachEntity;
 import uz.urinov.youtube.exp.AppBadException;
 import uz.urinov.youtube.repository.AttachRepository;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.*;
 
+@Slf4j
 @Service
 public class AttachService {
     @Autowired
@@ -41,6 +43,7 @@ public class AttachService {
             String pathName = getYdmString();
             File folder = new File("uploads/" + pathName);
             if (!folder.exists()) {
+                log.info("Creating folder " + folder.getAbsolutePath());
                 folder.mkdirs();
             }
             String key = UUID.randomUUID().toString();
@@ -48,7 +51,7 @@ public class AttachService {
             String extension = getExtension(file.getOriginalFilename());
             //save to system
             byte[] bytes = file.getBytes();
-            Path path = Paths.get("uploads/" + pathName + "/" + key + "." + extension);
+            Path path = Paths.get(attachUrl + pathName + "/" + key + "." + extension);
             Files.write(path, bytes);
 
             //save to db
@@ -74,7 +77,7 @@ public class AttachService {
         attachDTO.setSize(attachEntity.getSize());
         attachDTO.setExtension(attachEntity.getExtension());
         attachDTO.setDuration(attachEntity.getDuration());
-        attachDTO.setPath(attachUrl+attachEntity.getPath()+"/"+attachEntity.getId());
+        attachDTO.setPath(attachUrl + attachEntity.getPath() + "/" + attachEntity.getId());
         return attachDTO;
     }
 
@@ -84,9 +87,10 @@ public class AttachService {
     }
 
     public String getYdmString() {
-        int year = Calendar.getInstance().get(Calendar.YEAR);
-        int month = Calendar.getInstance().get(Calendar.MONTH);
-        int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        LocalDate date = LocalDate.now();
+        int year = date.getYear();
+        int month = date.getMonthValue();
+        int day = date.getDayOfMonth();
         return year + "/" + month + "/" + day;
     }
 
@@ -97,6 +101,7 @@ public class AttachService {
             String path = entity.getPath() + "/" + attachId;
             Path file = Paths.get("uploads/" + path);
             data = Files.readAllBytes(file);
+            log.info("Opening file " + file.getFileName() + " with path " + path);
             return data;
         } catch (IOException e) {
             e.printStackTrace();
@@ -107,6 +112,7 @@ public class AttachService {
     public AttachEntity get(String attachId) {
         Optional<AttachEntity> attachEntity = attachRepository.findById(attachId);
         if (attachEntity.isEmpty()) {
+            log.info(AttachEntity.class.getSimpleName() + " with id " + attachId + " not found");
             throw new AppBadException("Attach Not Found");
         }
         return attachEntity.get();
@@ -123,9 +129,11 @@ public class AttachService {
                 return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                         "attachment; filename=\"" + entity.getOriginName() + "\"").body(resource);
             } else {
+                log.info("Not able to read file " + file);
                 throw new RuntimeException("Could not read the file!");
             }
         } catch (MalformedURLException e) {
+            log.info("Malformed URL " + e.getMessage());
             throw new RuntimeException("Error: " + e.getMessage());
         }
     }
@@ -144,9 +152,10 @@ public class AttachService {
 
     public String delete(String filename) {
         AttachEntity attachEntity = get(filename);
-        File file = new File("uploads/"+attachEntity.getPath()+"/"+filename);
+        File file = new File("uploads/" + attachEntity.getPath() + "/" + filename);
         if (!file.delete()) {
-           return "Could not delete the file!";
+            log.info("File {} not deleted " + filename);
+            return "Could not delete the file!";
         }
         attachRepository.delete(attachEntity);
         return "Deleted the file!";

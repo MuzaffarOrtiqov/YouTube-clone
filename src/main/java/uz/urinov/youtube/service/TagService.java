@@ -1,5 +1,6 @@
 package uz.urinov.youtube.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.urinov.youtube.dto.category.CategoryDTO;
@@ -13,6 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class TagService {
     @Autowired
     private TagRepository tagRepository;
@@ -20,6 +22,7 @@ public class TagService {
     public TagDTO createTag(TagDTO tagDTO) {
         //check if tag was created before
         if (checkTagExists(tagDTO.getName())) {
+            log.info("Tag {} already exists", tagDTO.getName());
             TagEntity tagEntity = tagRepository.existsByName(tagDTO.getName());
             return toDTO(tagEntity);
         }
@@ -49,18 +52,21 @@ public class TagService {
     public TagDTO updateTag(Integer id, UpdateTagDTO tagDTO) {
         TagEntity tag = getTag(id);
         tag.setName(tagDTO.getName());
+        log.info("Updating tag {}", tag.getName());
         tagRepository.save(tag);
         return toDTO(tag);
     }
 
     public TagEntity getTag(Integer id) {
         return tagRepository.findById(id).orElseThrow(() -> {
+            log.info("Tag {} not found", id);
             throw new AppBadException("Tag not found");
         });
     }
 
     public String deleteTag(Integer id) {
         TagEntity tag = getTag(id);
+        log.info("Deleting tag {}", tag.getName());
         tagRepository.delete(tag);
         return "Tag " + id + " deleted";
     }

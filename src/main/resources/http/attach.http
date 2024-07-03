@@ -1,5 +1,6 @@
 POST localhost:8080/attach/upload
 Content-Type:multipart/form-data; boundary=WebAppBoundary
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk4MjMxNTUsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTk5MDk1NTUsImlzcyI6Ikt1blV6VGVzdCJ9.MBOi6b6hW3jvi6QbpX7qz4u4cjVLKgGHllL5yQVk_U_d0UyBoE77uk8538dPyTm5Ry7yL1Y0KGsow2NHwry02A
 
 --WebAppBoundary
 Content-Disposition: form-data; name="file"; filename="testvideo.mp4"
@@ -7,13 +8,18 @@ Content-Disposition: form-data; name="file"; filename="testvideo.mp4"
 < C:\Users\HP\Desktop\test\testvideo.mp4
 
 ### LOAD FILE
-GET localhost:8080/attach/open/e53765af-1bd0-46b2-b5fd-a78ef2909a6f.mp4
+GET localhost:8080/attach/open/7509d905-777b-45ba-b9c0-450f8e730c37.mp4
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk4MjMxNTUsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTk5MDk1NTUsImlzcyI6Ikt1blV6VGVzdCJ9.MBOi6b6hW3jvi6QbpX7qz4u4cjVLKgGHllL5yQVk_U_d0UyBoE77uk8538dPyTm5Ry7yL1Y0KGsow2NHwry02A
+
 
 ### DOWNLOAD A FILE
-GET localhost:8080/attach/download/77e6c258-4b2a-4f05-bd6b-280458387e9a.jpg
+GET localhost:8080/attach/download/7509d905-777b-45ba-b9c0-450f8e730c37.mp4
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk4MjMxNTUsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTk5MDk1NTUsImlzcyI6Ikt1blV6VGVzdCJ9.MBOi6b6hW3jvi6QbpX7qz4u4cjVLKgGHllL5yQVk_U_d0UyBoE77uk8538dPyTm5Ry7yL1Y0KGsow2NHwry02A
 
 ###PAGINATION
 POST localhost:8080/attach/pagination
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk4MjMxNTUsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTk5MDk1NTUsImlzcyI6Ikt1blV6VGVzdCJ9.MBOi6b6hW3jvi6QbpX7qz4u4cjVLKgGHllL5yQVk_U_d0UyBoE77uk8538dPyTm5Ry7yL1Y0KGsow2NHwry02A
 
 ### DELETE
-DELETE localhost:8080/attach/delete/de4bdbd1-801e-41ff-be45-c13858362953.mp4
+DELETE localhost:8080/attach/delete/662b3e64-0e9c-442c-ae3e-dccb8c61b0ed.mp4
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk4MjMxNTUsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTk5MDk1NTUsImlzcyI6Ikt1blV6VGVzdCJ9.MBOi6b6hW3jvi6QbpX7qz4u4cjVLKgGHllL5yQVk_U_d0UyBoE77uk8538dPyTm5Ry7yL1Y0KGsow2NHwry02A
