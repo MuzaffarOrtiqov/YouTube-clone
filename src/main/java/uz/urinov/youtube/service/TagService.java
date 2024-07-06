@@ -32,6 +32,10 @@ public class TagService {
         tagRepository.save(tagEntity);
         return toDTO(tagEntity);
     }
+    public void createTag(List<TagDTO> tagDTOList) {
+        tagDTOList.forEach(tagDTO -> createTag(tagDTO));
+    }
+
 
     public boolean checkTagExists(String tagName) {
         TagEntity tag = tagRepository.existsByName(tagName);
@@ -79,5 +83,10 @@ public class TagService {
             dtoList.add(dto);
         });
         return dtoList;
+    }
+
+    public TagDTO getTagDTOById (Integer id){
+        TagEntity tag = getTag(id);
+        return toDTO(tag);
     }
 }

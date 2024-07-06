@@ -62,6 +62,8 @@ public class SecurityConfig {
                             .requestMatchers("/channel/adm/**").hasRole("ADMIN")
                             .requestMatchers("/category/all-categories").permitAll()
                             .requestMatchers("/tag/all-tags").permitAll()
+                            .requestMatchers("video/increase-view-count").permitAll()
+                            .requestMatchers("video/get-by-tag-id/*").permitAll()
 
                             .anyRequest()
                             .authenticated();

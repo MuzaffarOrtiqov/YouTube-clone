@@ -15,5 +15,6 @@ public class AttachDTO {
     private String extension;
     private String path;
     private Long duration;
+    private String url;
 
 }

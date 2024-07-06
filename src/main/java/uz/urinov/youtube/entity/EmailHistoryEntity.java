@@ -19,6 +19,7 @@ public class EmailHistoryEntity {
     private Integer id;
 
     @NotBlank
+    @Column(columnDefinition = "text")
     private String message;
 
     @Email

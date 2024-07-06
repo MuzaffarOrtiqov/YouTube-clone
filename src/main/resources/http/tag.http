@@ -1,10 +1,10 @@
 ### CREATE TAG
 POST localhost:8080/tag/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MTk4MjMxNTUsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MTk5MDk1NTUsImlzcyI6Ikt1blV6VGVzdCJ9.MBOi6b6hW3jvi6QbpX7qz4u4cjVLKgGHllL5yQVk_U_d0UyBoE77uk8538dPyTm5Ry7yL1Y0KGsow2NHwry02A
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAxNzM2OTEsImlkIjoyLCJ1c2VybmFtZSI6Im9ydGlxb3ZtdXphZmZhcjE3MUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMjYwMDkxLCJpc3MiOiJLdW5VelRlc3QifQ.4esDlZUlA35n35rmUQ97jzFOErd5TXSwKqyuMLAqZpsKjUMujERYw6iamWiEQNfYZvg0C1rN7gzoodrsatYrZg
 
 {
-  "name": "#super"
+  "name": "#dinnerTime"
 }
 
 ### UPDATE TAG

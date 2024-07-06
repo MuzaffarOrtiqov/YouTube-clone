@@ -18,4 +18,5 @@ public class TagEntity {
     private String name;
     @Column(name = "created_date")
     private LocalDateTime createdDate;
+
 }
