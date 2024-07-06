@@ -36,6 +36,8 @@ public class AttachService {
     private AttachRepository attachRepository;
     @Value("${attach.upload.url}")
     private String attachUrl;
+    @Value("${server.url}")
+    private String serverUrl;
 
     public AttachDTO saveAttach(MultipartFile file) {
 
@@ -160,4 +162,13 @@ public class AttachService {
         attachRepository.delete(attachEntity);
         return "Deleted the file!";
     }
+    public AttachDTO getDTOWithURL(String attachId) {
+        AttachEntity attach = attachRepository.findById(attachId)
+                .orElseThrow(() -> new AppBadException("Attach not found"));
+        AttachDTO dto = new AttachDTO();
+        dto.setId(attachId);
+        dto.setUrl(serverUrl + "/" + "uploads/" + attach.getPath() + "/" + attachId);
+        return dto;
+    }
+
 }

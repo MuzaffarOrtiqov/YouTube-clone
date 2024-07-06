@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "name": "Ali",
   "surname": "Aliyev",
-  "email": "urinovshokirjon@gmail.com",
+  "email": "ortiqovmuzaffar171@gmail.com",
   "password": "12345"
 }
 
@@ -14,7 +14,7 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "username": "urinovshokirjon93@gmail.com",
+  "username": "ortiqovmuzaffar171@gmail.com",
   "password": "12345"
 }
 

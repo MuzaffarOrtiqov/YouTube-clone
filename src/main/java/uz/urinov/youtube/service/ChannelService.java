@@ -154,5 +154,10 @@ public class ChannelService {
                 new AppBadException("Channel id not found"));
     }
 
+    public ChannelResponseDTO getChannelDTOByChannelId(String channelId) {
+        ChannelEntity channelEntity = get(channelId);
+        return getDTO(channelEntity);
+    }
+
 
 }

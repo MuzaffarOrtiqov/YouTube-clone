@@ -66,4 +66,9 @@ public class CategoryService {
         });
         return dtoList;
     }
+
+    public CategoryDTO getCategoryDTOById(Integer id) {
+        CategoryEntity categoryEntity = getCategory(id);
+        return toDTO(categoryEntity);
+    }
 }
