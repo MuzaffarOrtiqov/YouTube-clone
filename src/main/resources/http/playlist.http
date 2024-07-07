@@ -1,0 +1,57 @@
+### 1. Create Playlist (USER)
+POST http://localhost:8080/playlist/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAyNjAzODgsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMzQ2Nzg4LCJpc3MiOiJLdW5VelRlc3QifQ.bbb69dIXQr3815OpLh_3QlO3Lf0WavnsM1maS-Kb7HrDS7CjzfVq_DC6vKqRhLATfAYUoT5kIHO4MCe3FYa0jg
+Content-Type: application/json
+
+{
+  "name": "Spring boot",
+  "description": "Spring boot bo'limlari haqida",
+  "orderNum": 2,
+  "channelId": "a421c930-a734-4685-9366-ca19454300b7",
+  "status": "PUBLIC"
+}
+
+<> 2024-07-04T055210.200.json
+
+### 2. Update Playlist(USER and OWNER)
+PUT http://localhost:8080/playlist/update/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwNTc2NjQsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMTQ0MDY0LCJpc3MiOiJLdW5VelRlc3QifQ.3L48x5tan2ZEEnb1ov6ACK84ykZx3js2o90TwwmYSSe1NebEyw0M6DOoBYJxsEAtfdSO0O63c3UyBXfmj_g5xA
+Content-Type: application/json
+
+{
+  "name": "Spring rest",
+  "description": "Spring bootga kirish ",
+  "orderNum": 3
+}
+
+### 3. Change Playlist Status (USER and OWNER)
+PUT http://localhost:8080/playlist/status
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAyNjAzODgsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMzQ2Nzg4LCJpc3MiOiJLdW5VelRlc3QifQ.bbb69dIXQr3815OpLh_3QlO3Lf0WavnsM1maS-Kb7HrDS7CjzfVq_DC6vKqRhLATfAYUoT5kIHO4MCe3FYa0jg
+Content-Type: application/x-www-form-urlencoded
+
+    playlistId=1&
+    status=PUBLIC
+
+### 4. Delete Playlist (USER and OWNER, ADMIN)
+DELETE http://localhost:8080/playlist/delete/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwNzE1NzksImlkIjozLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwMTU3OTc5LCJpc3MiOiJLdW5VelRlc3QifQ.kdGi9NlZKXS351sr-PEfeiemuGdX5DzgXw3rkb2d1DKEm4gEYEfi2tfPW-lnMUNtB0XshAKJDWmkb16fGBcN3g
+
+### // 5. Playlist Pagination (ADMIN) PlayListInfo
+GET http://localhost:8080/playlist/adm/pagination
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwNzE1NzksImlkIjozLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwMTU3OTc5LCJpc3MiOiJLdW5VelRlc3QifQ.kdGi9NlZKXS351sr-PEfeiemuGdX5DzgXw3rkb2d1DKEm4gEYEfi2tfPW-lnMUNtB0XshAKJDWmkb16fGBcN3g
+
+    page=1&
+    size=3
+
+### // 6. Playlist List By UserId (order by order number desc) (ADMIN) PlayListInfo
+GET http://localhost:8080/playlist/list-userId/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAyNjAyNTgsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwMzQ2NjU4LCJpc3MiOiJLdW5VelRlc3QifQ.NWRDyYSv2tCQk-OfF_8ccR9_Avo-4DgJ-ybGFvTwC-fuZ9sTAVvtU1688pSBW1IL8Z_nHCyrN4Y2HHw-jbIfjA
+
+
+### // 7. Get User Playlist (order by order number desc) (murojat qilgan user ni) PlayListShortInfo
+GET http://localhost:8080/playlist/list-user
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwOTM2NjYsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMTgwMDY2LCJpc3MiOiJLdW5VelRlc3QifQ.Ohy6KjtHl0d7NMzDeiPPLNgcqjk45JeMnVsP4fYajoi-V3WzyOuADn1veXSf_jOieXxvQ6pIGdZQ3-L0eKqi8g
+
+### // 8. Get Channel Play List By ChannelKey (order by order_num desc) (only Public) PlayListShortInfo
+GET http://localhost:8080/playlist/list-user-all/6336e5fb-5ee1-4e81-af57-cd983cf17b25
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwOTQ1MzYsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjNAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTcyMDE4MDkzNiwiaXNzIjoiS3VuVXpUZXN0In0.uvVniIl42omrBx7TWpFWQubrrPmWfC4Lan2aglwbyPJRWkNYq2bTgPDyvXl--XKBePhkwHHFzDXABDt5Lei1dg
