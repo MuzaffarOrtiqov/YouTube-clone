@@ -29,7 +29,7 @@ public class VideoEntity {
     private CategoryEntity category;
     @Column(name = "attach_id")
     private String attachId;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attach_id",insertable = false, updatable = false)
     private AttachEntity attach;
     @Column(name = "created_date")
@@ -57,6 +57,8 @@ public class VideoEntity {
     private Long likeCount;
     @Column(name = "dislike_count")
     private Long dislikeCount;
+    @Column(name = "visible")
+    private Boolean visible=true;
 
 
 }

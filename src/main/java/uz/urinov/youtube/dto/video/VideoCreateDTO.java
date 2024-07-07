@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 public class VideoCreateDTO {
-    private String  preview_attach_id;
+    private String  previewAttachId;
     @NotBlank(message = "Title is required")
     private String  title;
     @NotNull(message = "You must specify the category")

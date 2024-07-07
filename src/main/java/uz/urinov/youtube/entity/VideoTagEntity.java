@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Entity
@@ -24,6 +26,9 @@ public class VideoTagEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tag_id",insertable=false,updatable=false)
     private TagEntity tag;
+
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
 
 
 }

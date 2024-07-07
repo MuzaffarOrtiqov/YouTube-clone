@@ -156,7 +156,11 @@ public class ChannelService {
 
     public ChannelResponseDTO getChannelDTOByChannelId(String channelId) {
         ChannelEntity channelEntity = get(channelId);
-        return getDTO(channelEntity);
+        ChannelResponseDTO channelResponseDTO = new ChannelResponseDTO();
+        channelResponseDTO.setId(channelEntity.getId());
+        channelResponseDTO.setName(channelEntity.getName());
+        channelEntity.setPhotoId(channelEntity.getPhotoId());
+        return channelResponseDTO;
     }
 
 

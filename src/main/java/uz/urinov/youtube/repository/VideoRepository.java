@@ -50,5 +50,8 @@ public interface VideoRepository extends CrudRepository<VideoEntity, String> {
     @Query(value = "FROM VideoEntity AS v INNER JOIN VideoTagEntity AS vt ON v.id = vt.videoId WHERE vt.tagId=?1" )
     Page<VideoEntity> paginationWithTagId(Integer tagId, Pageable pageable);
 
-
+    @Query(value = "FROM VideoEntity AS v  " +
+            "INNER JOIN v.channel AS ch " +
+            "INNER JOIN ch.profile WHERE v.visible=true ")
+    Page<VideoEntity> findAll(Pageable pageable);
 }

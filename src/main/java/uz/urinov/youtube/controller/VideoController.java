@@ -83,13 +83,24 @@ public class VideoController {
         log.info("pagination with tag id : {}", tagId);
         return ResponseEntity.ok(videoService.paginationWithTag(tagId,page-1,size));
     }
+
     @GetMapping("/get-video-by-id/{videoId}")
-    @Operation(summary = "Get everthing about the video")
+    @Operation(summary = "Get everything about the video")
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     public ResponseEntity<VideoDTO> getVideoById(@PathVariable String videoId) {
         log.info("get video by id : {}", videoId);
         return ResponseEntity.ok(videoService.getVideoFullInfoById(videoId));
     }
+    @GetMapping("/get-video-list")
+    @Operation(summary = "Get all videos on platform")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Page<VideoDTO>> getAllVideos(@RequestParam(name = "page", defaultValue = "1") int page,
+                                                       @RequestParam(name = "size",defaultValue = "3")int size) {
+        return ResponseEntity.ok(videoService.getAllVideos(page-1,size));
+    }
+
+
+
 
 
 }

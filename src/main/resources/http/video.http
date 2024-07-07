@@ -1,10 +1,10 @@
 ### CREATE VIDEO
 POST localhost:8080/video/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAxNzM2OTEsImlkIjoyLCJ1c2VybmFtZSI6Im9ydGlxb3ZtdXphZmZhcjE3MUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMjYwMDkxLCJpc3MiOiJLdW5VelRlc3QifQ.4esDlZUlA35n35rmUQ97jzFOErd5TXSwKqyuMLAqZpsKjUMujERYw6iamWiEQNfYZvg0C1rN7gzoodrsatYrZg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAyNTgxOTgsImlkIjoyLCJ1c2VybmFtZSI6Im9ydGlxb3ZtdXphZmZhcjE3MUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMzQ0NTk4LCJpc3MiOiJLdW5VelRlc3QifQ.-6H05FUkeX1z_rdcRIyCy5zb1WZG20tNzrbXyUcHHFSZS6Rd1BdFlwZAzNGxyzehw39fiYOcd83WrItfwlMGwA
 
 {
-  "title": "Dasturlash sirlari",
+  "title": "Dasturlash sirlari 2",
   "categoryId": 1,
   "attachId": "6f4d527d-8c09-41fc-82f0-6a15d3cffdbe.mp4",
    "type": "VIDEO",
@@ -42,4 +42,12 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwNzk1MDIsImlkIjoyLCJ1c
 ### SEARCH BY TAG ID
 GET localhost:8080/video/get-by-tag-id/2
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAxNzM2OTEsImlkIjoyLCJ1c2VybmFtZSI6Im9ydGlxb3ZtdXphZmZhcjE3MUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMjYwMDkxLCJpc3MiOiJLdW5VelRlc3QifQ.4esDlZUlA35n35rmUQ97jzFOErd5TXSwKqyuMLAqZpsKjUMujERYw6iamWiEQNfYZvg0C1rN7gzoodrsatYrZg
+
+### GET VIDEO FULL INFO
+GET localhost:8080/video/get-video-by-id/414c466c-baa1-485d-bb19-f08c4ff01e6d
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAyNTgxOTgsImlkIjoyLCJ1c2VybmFtZSI6Im9ydGlxb3ZtdXphZmZhcjE3MUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMzQ0NTk4LCJpc3MiOiJLdW5VelRlc3QifQ.-6H05FUkeX1z_rdcRIyCy5zb1WZG20tNzrbXyUcHHFSZS6Rd1BdFlwZAzNGxyzehw39fiYOcd83WrItfwlMGwA
+
+### GET ALL VIDEOS PAGINATION
+GET localhost:8080/video/get-video-list
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAzMzc1ODYsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MjA0MjM5ODYsImlzcyI6Ikt1blV6VGVzdCJ9.JTHSBYuxVZChTS8SHwrmQdsrDaCQmWM-6f7ZKfd1-ZuzBu-_tYviyDvlnowiBYPpEGiAOlcq3-OV5d5Lct4d_g
 

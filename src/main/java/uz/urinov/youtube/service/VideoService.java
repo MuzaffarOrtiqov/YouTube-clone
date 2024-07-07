@@ -11,7 +11,6 @@ import uz.urinov.youtube.dto.video.VideoDTO;
 import uz.urinov.youtube.dto.video.VideoUpdateDTO;
 import uz.urinov.youtube.entity.ProfileEntity;
 import uz.urinov.youtube.entity.VideoEntity;
-import uz.urinov.youtube.entity.VideoTagEntity;
 import uz.urinov.youtube.enums.ProfileRole;
 import uz.urinov.youtube.enums.VideoStatus;
 import uz.urinov.youtube.exp.AppBadException;
@@ -32,11 +31,12 @@ public class VideoService {
     private TagService tagService;
     private VideoTagRepository videoTagRepository;
     private ChannelService channelService;
+    private ProfileService profileService;
 
     public VideoService(VideoRepository videoRepository,
                         AttachService attachService, VideoTagService videoTagService,
                         CategoryService categoryService, TagService tagService,
-                        VideoTagRepository videoTagRepository, ChannelService channelService) {
+                        VideoTagRepository videoTagRepository, ChannelService channelService, ProfileService profileService) {
         this.videoRepository = videoRepository;
         this.attachService = attachService;
         this.videoTagService = videoTagService;
@@ -44,12 +44,13 @@ public class VideoService {
         this.tagService = tagService;
         this.videoTagRepository = videoTagRepository;
         this.channelService = channelService;
+        this.profileService = profileService;
     }
 
     //    1. Create Video (USER)
     public VideoDTO create(VideoCreateDTO videoCreateDTO) {
         VideoEntity videoEntity = new VideoEntity();
-        videoEntity.setPreviewAttachId(videoEntity.getPreviewAttachId());
+        videoEntity.setPreviewAttachId(videoCreateDTO.getPreviewAttachId());
         videoEntity.setTitle(videoCreateDTO.getTitle());
         videoEntity.setCategoryId(videoCreateDTO.getCategoryId());
         videoEntity.setAttachId(videoCreateDTO.getAttachId());
@@ -131,6 +132,7 @@ public class VideoService {
         return toFullInfo(videoEntity);
     }
 
+
     public boolean isOwnerOrAdmin(String videoId) {
         VideoEntity videoEntity = getVideoById(videoId);
         ProfileEntity profile = SecurityUtil.getProfile();
@@ -157,7 +159,7 @@ public class VideoService {
         videoDTO.setPreviewAttach(attachService.getDTOWithURL(videoEntity.getPreviewAttachId()));
         videoDTO.setAttach(attachService.getDTOWithURL(videoEntity.getAttachId()));
         videoDTO.setCategory(categoryService.getCategoryDTOById(videoEntity.getCategoryId()));
-        videoDTO.setTag(tagService.getTagDTOById(videoTagRepository.findTagIdByVideoId(videoEntity.getId())));
+        videoDTO.setTagIdList(videoTagService.findTagIdListByVideoId(videoEntity.getId()));   //TODO tag name ni chiqarish kk
         videoDTO.setPublishedDate(videoEntity.getPublishedDate());
         videoDTO.setChannel(channelService.getChannelDTOByChannelId(videoEntity.getChannelId()));
         videoDTO.setViewCount(videoEntity.getViewCount());
@@ -185,7 +187,7 @@ public class VideoService {
         videoDTO.setTitle(videoEntity.getTitle());
         videoDTO.setAttach(attachService.getDTOWithURL(videoEntity.getAttachId()));
         videoDTO.setPublishedDate(videoEntity.getPublishedDate());
-        videoDTO.setChannel(videoDTO.getChannel());
+        videoDTO.setChannel(channelService.getChannelDTOByChannelId(videoEntity.getChannelId()));
         videoDTO.setViewCount(videoEntity.getViewCount());
         return videoDTO;
     }
@@ -199,4 +201,25 @@ public class VideoService {
         return true;
     }
 
+
+    public Page<VideoDTO> getAllVideos(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<VideoEntity> pageObj = videoRepository.findAll(pageable);
+        Long total = pageObj.getTotalElements();
+        List<VideoDTO> videoDTOList = new LinkedList<>();
+        pageObj.map(videoEntity -> {
+            VideoDTO videoDTO = new VideoDTO();
+            videoDTO.setId(videoEntity.getId());
+            videoDTO.setTitle(videoEntity.getTitle());
+            videoDTO.setAttach(attachService.getDTOWithURL(videoEntity.getAttachId()));
+            videoDTO.setPublishedDate(videoEntity.getPublishedDate());;
+            videoDTO.setChannel(channelService.getChannelDTOByChannelId(videoEntity.getChannelId()));
+            videoDTO.setViewCount(videoEntity.getViewCount());
+            videoDTO.setProfileResponseDTO(profileService.getProfileResponseDTO(videoEntity.getChannel().getProfile().getId()));
+            videoDTOList.add(videoDTO);
+            //TODO
+            return videoDTO;
+        });
+        return new PageImpl<>(videoDTOList, pageable, total);
+    }
 }

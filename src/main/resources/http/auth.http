@@ -14,7 +14,7 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "username": "ortiqovmuzaffar171@gmail.com",
+  "username": "muzaffarmike2@gmail.com",
   "password": "12345"
 }
 
