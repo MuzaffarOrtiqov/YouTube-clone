@@ -62,9 +62,13 @@ public class SecurityConfig {
                             .requestMatchers("/channel/adm/**").hasRole("ADMIN")
                             .requestMatchers("/category/all-categories").permitAll()
                             .requestMatchers("/tag/all-tags").permitAll()
-                            .requestMatchers("video/increase-view-count").permitAll()
-                            .requestMatchers("video/get-by-tag-id/*").permitAll()
-                            .requestMatchers("video/channel/*/videos").permitAll()
+                            .requestMatchers("/video/increase-view-count").permitAll()
+                            .requestMatchers("/video/get-by-tag-id/*").permitAll()
+                            .requestMatchers("/video/pagination/*").permitAll()
+                            .requestMatchers("/video/search-by-title").permitAll()
+                            .requestMatchers("/video/channel/*/videos").permitAll()
+                            .requestMatchers("/video/get-video-by-id/*").permitAll()
+                            .requestMatchers("/video-tag/tag-list").permitAll()
 
                             .anyRequest()
                             .authenticated();

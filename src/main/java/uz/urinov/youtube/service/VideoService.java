@@ -3,6 +3,7 @@ package uz.urinov.youtube.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -37,20 +38,21 @@ public class VideoService {
     private VideoRepository videoRepository;
     @Autowired
     private AttachService attachService;
+
+    private final VideoTagService videoTagService;
     @Autowired
-    private VideoTagService videoTagService;
+    public VideoService(@Lazy VideoTagService videoTagService) {
+        this.videoTagService = videoTagService;
+    }
     @Autowired
     private CategoryService categoryService;
-    @Autowired
-    private TagService tagService;
     @Autowired
     private ChannelService channelService;
     @Autowired
     private ProfileService profileService;
     @Autowired
     private PlaylistService playlistService;
-    @Autowired
-    private ChannelRepository channelRepository;
+
 
     //    1. Create Video (USER)
     public VideoDTO create(VideoCreateDTO videoCreateDTO) {
@@ -250,5 +252,13 @@ public class VideoService {
         });
         return new PageImpl<>(videoDTOList, pageable, total);
 
+    }
+
+    public Integer findUser(String videoId) {
+        Integer user = videoRepository.findUser(videoId);
+        if (user == null) {
+            throw new AppBadException("User not found");
+        }
+        return user;
     }
 }

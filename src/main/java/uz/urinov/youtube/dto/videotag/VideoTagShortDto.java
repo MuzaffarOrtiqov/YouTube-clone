@@ -1,6 +1,4 @@
-package uz.urinov.youtube.dto;
-
-import lombok.AllArgsConstructor;
+package uz.urinov.youtube.dto.videotag;
 
 
 public interface VideoTagShortDto {

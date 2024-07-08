@@ -15,6 +15,7 @@ public class VideoTagEntity {
     @Id
     @UuidGenerator
     private String id;
+
     @Column(name = "video_id")
     private String videoId;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -28,7 +29,7 @@ public class VideoTagEntity {
     private TagEntity tag;
 
     @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDate=LocalDateTime.now();
 
 
 }
