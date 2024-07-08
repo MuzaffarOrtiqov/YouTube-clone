@@ -30,13 +30,6 @@ public class VideoTagService {
 
     }
 
-    public List<Integer> findTagIdListByVideoId(String videoId) {
-        List<Integer> tagIdList = videoTagRepository.findTagIdListByVideoId(videoId);
-        if (tagIdList.isEmpty()) {
-            throw new AppBadException("Tag not found");
-        }
-        return tagIdList;
-    }
     public List<VideoTagShortDto> findTagDtoListByVideoId(String videoId) {
         List<VideoTagShortDto> allByVideoId = videoTagRepository.findAllByVideoId(videoId);
         if (allByVideoId.isEmpty()) {
