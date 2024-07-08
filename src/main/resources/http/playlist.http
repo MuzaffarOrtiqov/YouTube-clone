@@ -1,13 +1,13 @@
 ### 1. Create Playlist (USER)
 POST http://localhost:8080/playlist/create
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAyNjAzODgsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMzQ2Nzg4LCJpc3MiOiJLdW5VelRlc3QifQ.bbb69dIXQr3815OpLh_3QlO3Lf0WavnsM1maS-Kb7HrDS7CjzfVq_DC6vKqRhLATfAYUoT5kIHO4MCe3FYa0jg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAzNDk2MjAsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MjA0MzYwMjAsImlzcyI6Ikt1blV6VGVzdCJ9.alS40KATn16PM5JGXuHagv_49eR9WdyAso6-_SHhOChTNmVcYmE6Dy5RAvuz_1tC_9C6o6By55bfHXMINYr80A
 Content-Type: application/json
 
 {
   "name": "Spring boot",
   "description": "Spring boot bo'limlari haqida",
-  "orderNum": 2,
-  "channelId": "a421c930-a734-4685-9366-ca19454300b7",
+  "orderNum": 1,
+  "channelId": "0cc55e68-2eba-46f0-826a-c77afa452819",
   "status": "PUBLIC"
 }
 

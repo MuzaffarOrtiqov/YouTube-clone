@@ -1,6 +1,8 @@
 package uz.urinov.youtube.service;
 
 import org.springframework.stereotype.Service;
+import uz.urinov.youtube.dto.VideoTagShortDto;
+import uz.urinov.youtube.dto.tag.TagDTO;
 import uz.urinov.youtube.entity.VideoTagEntity;
 import uz.urinov.youtube.exp.AppBadException;
 import uz.urinov.youtube.repository.VideoTagRepository;
@@ -34,5 +36,12 @@ public class VideoTagService {
             throw new AppBadException("Tag not found");
         }
         return tagIdList;
+    }
+    public List<VideoTagShortDto> findTagDtoListByVideoId(String videoId) {
+        List<VideoTagShortDto> allByVideoId = videoTagRepository.findAllByVideoId(videoId);
+        if (allByVideoId.isEmpty()) {
+            throw new AppBadException("Tag not found");
+        }
+      return allByVideoId;
     }
 }

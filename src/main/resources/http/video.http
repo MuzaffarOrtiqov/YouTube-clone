@@ -1,14 +1,14 @@
 ### CREATE VIDEO
 POST localhost:8080/video/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAyNTgxOTgsImlkIjoyLCJ1c2VybmFtZSI6Im9ydGlxb3ZtdXphZmZhcjE3MUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMzQ0NTk4LCJpc3MiOiJLdW5VelRlc3QifQ.-6H05FUkeX1z_rdcRIyCy5zb1WZG20tNzrbXyUcHHFSZS6Rd1BdFlwZAzNGxyzehw39fiYOcd83WrItfwlMGwA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA0MTkxMzYsImlkIjoxLCJ1c2VybmFtZSI6Im9ydGlxb3ZtdXphZmZhcjE3MUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwNTA1NTM2LCJpc3MiOiJLdW5VelRlc3QifQ.oH31zPGUeJH7RwjDdERJJ-RDSmcH3NY4_piRT8X0FDiH6h3t8mAM5ruIpi24COj7fieaaqQtL39kRYhGcysb8A
 
 {
   "title": "Dasturlash sirlari 2",
   "categoryId": 1,
-  "attachId": "6f4d527d-8c09-41fc-82f0-6a15d3cffdbe.mp4",
+  "attachId": "58375103-f0c4-4fbc-b28a-70fc076c5829.mp4",
    "type": "VIDEO",
-  "channelId": "d00293c7-fe3f-4213-a580-24dcb5c736ec",
+  "channelId": "0cc55e68-2eba-46f0-826a-c77afa452819",
   "tags": [1,2]
 }
 
@@ -44,10 +44,14 @@ GET localhost:8080/video/get-by-tag-id/2
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAxNzM2OTEsImlkIjoyLCJ1c2VybmFtZSI6Im9ydGlxb3ZtdXphZmZhcjE3MUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMjYwMDkxLCJpc3MiOiJLdW5VelRlc3QifQ.4esDlZUlA35n35rmUQ97jzFOErd5TXSwKqyuMLAqZpsKjUMujERYw6iamWiEQNfYZvg0C1rN7gzoodrsatYrZg
 
 ### GET VIDEO FULL INFO
-GET localhost:8080/video/get-video-by-id/414c466c-baa1-485d-bb19-f08c4ff01e6d
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAyNTgxOTgsImlkIjoyLCJ1c2VybmFtZSI6Im9ydGlxb3ZtdXphZmZhcjE3MUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMzQ0NTk4LCJpc3MiOiJLdW5VelRlc3QifQ.-6H05FUkeX1z_rdcRIyCy5zb1WZG20tNzrbXyUcHHFSZS6Rd1BdFlwZAzNGxyzehw39fiYOcd83WrItfwlMGwA
+GET localhost:8080/video/get-video-by-id/60e2a11c-8cb1-4e47-98ce-428a6baceea4
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAzNDk2MjAsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MjA0MzYwMjAsImlzcyI6Ikt1blV6VGVzdCJ9.alS40KATn16PM5JGXuHagv_49eR9WdyAso6-_SHhOChTNmVcYmE6Dy5RAvuz_1tC_9C6o6By55bfHXMINYr80A
+
 
 ### GET ALL VIDEOS PAGINATION
 GET localhost:8080/video/get-video-list
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAzMzc1ODYsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MjA0MjM5ODYsImlzcyI6Ikt1blV6VGVzdCJ9.JTHSBYuxVZChTS8SHwrmQdsrDaCQmWM-6f7ZKfd1-ZuzBu-_tYviyDvlnowiBYPpEGiAOlcq3-OV5d5Lct4d_g
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAzNDk2MjAsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MjA0MzYwMjAsImlzcyI6Ikt1blV6VGVzdCJ9.alS40KATn16PM5JGXuHagv_49eR9WdyAso6-_SHhOChTNmVcYmE6Dy5RAvuz_1tC_9C6o6By55bfHXMINYr80A
+
+### GET ALL VIDEOS OF A CHANNEL
+GET localhost:8080/video/channel/0cc55e68-2eba-46f0-826a-c77afa452819/videos
 

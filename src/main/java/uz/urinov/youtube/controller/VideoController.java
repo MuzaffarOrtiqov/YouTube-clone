@@ -39,8 +39,8 @@ public class VideoController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @Operation(summary = "Update video details")
     public ResponseEntity<VideoDTO> updateVideo(@PathVariable String videoId, @RequestBody VideoUpdateDTO videoUpdateDTO) {
-        log.info("updating video with id  : {}",videoId);
-        return ResponseEntity.ok(videoService.update(videoId,videoUpdateDTO));
+        log.info("updating video with id  : {}", videoId);
+        return ResponseEntity.ok(videoService.update(videoId, videoUpdateDTO));
     }
 
     @PutMapping("/update-status/{attachId}")
@@ -81,7 +81,7 @@ public class VideoController {
                                                             @RequestParam(name = "page", defaultValue = "1") int page,
                                                             @RequestParam(name = "size", defaultValue = "3") int size) {
         log.info("pagination with tag id : {}", tagId);
-        return ResponseEntity.ok(videoService.paginationWithTag(tagId,page-1,size));
+        return ResponseEntity.ok(videoService.paginationWithTag(tagId, page - 1, size));
     }
 
     @GetMapping("/get-video-by-id/{videoId}")
@@ -91,16 +91,22 @@ public class VideoController {
         log.info("get video by id : {}", videoId);
         return ResponseEntity.ok(videoService.getVideoFullInfoById(videoId));
     }
+
     @GetMapping("/get-video-list")
     @Operation(summary = "Get all videos on platform")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Page<VideoDTO>> getAllVideos(@RequestParam(name = "page", defaultValue = "1") int page,
-                                                       @RequestParam(name = "size",defaultValue = "3")int size) {
-        return ResponseEntity.ok(videoService.getAllVideos(page-1,size));
+                                                       @RequestParam(name = "size", defaultValue = "3") int size) {
+        return ResponseEntity.ok(videoService.getAllVideos(page - 1, size));
     }
 
-
-
+    @GetMapping("/channel/{channelId}/videos")
+    @Operation(summary = "Find all videos of a channel")
+    public ResponseEntity<Page<VideoDTO>> getVideoByChannelId(@PathVariable(name = "channelId") String channelId,
+                                                              @RequestParam(name = "page",defaultValue = "1") int page,
+                                                              @RequestParam(name = "size",defaultValue = "3") int size) {
+        return ResponseEntity.ok(videoService.getVideoByChannelId(channelId, page-1, size));
+    }
 
 
 }

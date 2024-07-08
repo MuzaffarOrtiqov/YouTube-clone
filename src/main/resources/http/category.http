@@ -1,10 +1,10 @@
 ### CREATE CATEGORY
 POST localhost:8080/category/adm/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwNzg0NzksImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MjAxNjQ4NzksImlzcyI6Ikt1blV6VGVzdCJ9.2IO07Un63P1ds5HpfGWyVRKHxfETrUCvgCinkHhJhtglE_dhY3g5rTtwphTuQOdsqY_JcifQoZ4Mgm6cJLLKWw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA0MTk2OTAsImlkIjoyLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MjA1MDYwOTAsImlzcyI6Ikt1blV6VGVzdCJ9.c3tTknbS0EA8TdN_s_wGiIiwFFovUpZEG7M7gQclZ9jeK1T_t69aqANyZTnWbZFMEgto-VWYTeqr2WxRSydwAQ
 
 {
-  "name": "For you"
+  "name": "live"
 }
 
 ### UPDATE CATEGORY

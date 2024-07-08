@@ -64,6 +64,7 @@ public class SecurityConfig {
                             .requestMatchers("/tag/all-tags").permitAll()
                             .requestMatchers("video/increase-view-count").permitAll()
                             .requestMatchers("video/get-by-tag-id/*").permitAll()
+                            .requestMatchers("video/channel/*/videos").permitAll()
 
                             .anyRequest()
                             .authenticated();

@@ -1,19 +1,28 @@
 package uz.urinov.youtube.service;
 
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import uz.urinov.youtube.dto.attach.AttachDTO;
+import uz.urinov.youtube.dto.channel.ChannelResponseDTO;
+import uz.urinov.youtube.dto.playlist.PlaylistResponseDTO;
+import uz.urinov.youtube.dto.profile.ProfileResponseDTO;
+import uz.urinov.youtube.dto.tag.TagDTO;
 import uz.urinov.youtube.dto.video.VideoCreateDTO;
 import uz.urinov.youtube.dto.video.VideoDTO;
 import uz.urinov.youtube.dto.video.VideoUpdateDTO;
+import uz.urinov.youtube.entity.ChannelEntity;
 import uz.urinov.youtube.entity.ProfileEntity;
 import uz.urinov.youtube.entity.VideoEntity;
 import uz.urinov.youtube.enums.ProfileRole;
 import uz.urinov.youtube.enums.VideoStatus;
 import uz.urinov.youtube.exp.AppBadException;
+import uz.urinov.youtube.repository.ChannelRepository;
 import uz.urinov.youtube.repository.VideoRepository;
 import uz.urinov.youtube.repository.VideoTagRepository;
 import uz.urinov.youtube.util.SecurityUtil;
@@ -21,34 +30,37 @@ import uz.urinov.youtube.util.SecurityUtil;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-
+@Slf4j
 @Service
 public class VideoService {
+    @Autowired
     private VideoRepository videoRepository;
+    @Autowired
     private AttachService attachService;
+    @Autowired
     private VideoTagService videoTagService;
+    @Autowired
     private CategoryService categoryService;
+    @Autowired
     private TagService tagService;
-    private VideoTagRepository videoTagRepository;
+    @Autowired
     private ChannelService channelService;
+    @Autowired
     private ProfileService profileService;
-
-    public VideoService(VideoRepository videoRepository,
-                        AttachService attachService, VideoTagService videoTagService,
-                        CategoryService categoryService, TagService tagService,
-                        VideoTagRepository videoTagRepository, ChannelService channelService, ProfileService profileService) {
-        this.videoRepository = videoRepository;
-        this.attachService = attachService;
-        this.videoTagService = videoTagService;
-        this.categoryService = categoryService;
-        this.tagService = tagService;
-        this.videoTagRepository = videoTagRepository;
-        this.channelService = channelService;
-        this.profileService = profileService;
-    }
+    @Autowired
+    private PlaylistService playlistService;
+    @Autowired
+    private ChannelRepository channelRepository;
 
     //    1. Create Video (USER)
     public VideoDTO create(VideoCreateDTO videoCreateDTO) {
+        VideoEntity videoEntity = toEntity(videoCreateDTO);
+        log.info("Create video with Attach Id : {}", videoCreateDTO.getAttachId());
+        videoRepository.save(videoEntity);
+        videoTagService.createVideoTag(videoEntity.getId(), videoCreateDTO.getTags());
+        return toDTO(videoEntity);
+    }
+    public VideoEntity toEntity(VideoCreateDTO videoCreateDTO) {
         VideoEntity videoEntity = new VideoEntity();
         videoEntity.setPreviewAttachId(videoCreateDTO.getPreviewAttachId());
         videoEntity.setTitle(videoCreateDTO.getTitle());
@@ -57,11 +69,8 @@ public class VideoService {
         videoEntity.setStatus(VideoStatus.PRIVATE);
         videoEntity.setType(videoCreateDTO.getType());
         videoEntity.setChannelId(videoCreateDTO.getChannelId());
-        videoRepository.save(videoEntity);
-        videoTagService.createVideoTag(videoEntity.getId(), videoCreateDTO.getTags());
-        return toDTO(videoEntity);
+        return videoEntity;
     }
-
     //   2. Update Video Detail (USER and OWNER)
     public VideoDTO update(String videoId, VideoUpdateDTO videoUpdateDTO) {
         if (isOwner(videoId)) {
@@ -71,7 +80,7 @@ public class VideoService {
             videoRepository.save(videoEntity);
             return toDTO(videoEntity);
         }
-        throw new AppBadException("Not authorized to update this video");
+        throw new AppBadException("No access to update this video");
     }
 
     // 3. Change Video Status (USER and OWNER)
@@ -100,7 +109,7 @@ public class VideoService {
 
     //  6. Search video by Title
     public List<VideoDTO> searchVideoByTitle(String title) {
-        List<VideoEntity> entityList = videoRepository.findByTile(title);
+        List<VideoEntity> entityList = videoRepository.findByTitle(title);
         List<VideoDTO> videoDTOList = new LinkedList<>();
         entityList.forEach(videoEntity -> {
             videoDTOList.add(toShortInfo(videoEntity));
@@ -134,7 +143,6 @@ public class VideoService {
 
 
     public boolean isOwnerOrAdmin(String videoId) {
-        VideoEntity videoEntity = getVideoById(videoId);
         ProfileEntity profile = SecurityUtil.getProfile();
         if (profile.getRole().equals(ProfileRole.ROLE_ADMIN) || isOwner(videoId)) {
             return true;
@@ -159,7 +167,7 @@ public class VideoService {
         videoDTO.setPreviewAttach(attachService.getDTOWithURL(videoEntity.getPreviewAttachId()));
         videoDTO.setAttach(attachService.getDTOWithURL(videoEntity.getAttachId()));
         videoDTO.setCategory(categoryService.getCategoryDTOById(videoEntity.getCategoryId()));
-        videoDTO.setTagIdList(videoTagService.findTagIdListByVideoId(videoEntity.getId()));   //TODO tag name ni chiqarish kk
+        videoDTO.setTagIdList(videoTagService.findTagDtoListByVideoId(videoEntity.getId()));   //TODO tag name ni chiqarish kk
         videoDTO.setPublishedDate(videoEntity.getPublishedDate());
         videoDTO.setChannel(channelService.getChannelDTOByChannelId(videoEntity.getChannelId()));
         videoDTO.setViewCount(videoEntity.getViewCount());
@@ -201,25 +209,46 @@ public class VideoService {
         return true;
     }
 
-
     public Page<VideoDTO> getAllVideos(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<VideoEntity> pageObj = videoRepository.findAll(pageable);
         Long total = pageObj.getTotalElements();
         List<VideoDTO> videoDTOList = new LinkedList<>();
         pageObj.map(videoEntity -> {
-            VideoDTO videoDTO = new VideoDTO();
-            videoDTO.setId(videoEntity.getId());
-            videoDTO.setTitle(videoEntity.getTitle());
-            videoDTO.setAttach(attachService.getDTOWithURL(videoEntity.getAttachId()));
-            videoDTO.setPublishedDate(videoEntity.getPublishedDate());;
-            videoDTO.setChannel(channelService.getChannelDTOByChannelId(videoEntity.getChannelId()));
+            //short information being created
+            VideoDTO videoDTO =toShortInfo(videoEntity);
             videoDTO.setViewCount(videoEntity.getViewCount());
-            videoDTO.setProfileResponseDTO(profileService.getProfileResponseDTO(videoEntity.getChannel().getProfile().getId()));
+            //create profileDTO  through channel
+            ProfileResponseDTO profileResponseDTO = profileService.getProfileResponseDTO(videoEntity.getChannel().getProfile().getId());
+            videoDTO.setProfileResponseDTO(profileResponseDTO);
+            //create playlist
+            List<PlaylistResponseDTO> playlistResponseDTOS = playlistService.getByChannelId(videoEntity.getChannelId());
+            videoDTO.setPlaylist(playlistResponseDTOS);
             videoDTOList.add(videoDTO);
-            //TODO
             return videoDTO;
         });
         return new PageImpl<>(videoDTOList, pageable, total);
+
+    }
+
+    public Page<VideoDTO> getVideoByChannelId(String channelId,int page, int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        Page<VideoEntity> pageObj = videoRepository.findAllVideosById(channelId,pageable);
+        Long total = pageObj.getTotalElements();
+        List<VideoDTO> videoDTOList = new LinkedList<>();
+        pageObj.map(videoEntity -> {
+            /*id,title, preview_attach(id,url), view_count,
+                       published_date,duration*/
+            VideoDTO videoDTO = new VideoDTO();
+            videoDTO.setId(videoEntity.getId());
+            videoDTO.setTitle(videoEntity.getTitle());
+            videoDTO.setPreviewAttach(attachService.getDTOWithURL(videoEntity.getPreviewAttachId()));
+            videoDTO.setViewCount(videoEntity.getViewCount());
+            videoDTO.setPublishedDate(videoEntity.getPublishedDate());
+            videoDTOList.add(videoDTO);
+            return videoDTOList;
+        });
+        return new PageImpl<>(videoDTOList, pageable, total);
+
     }
 }

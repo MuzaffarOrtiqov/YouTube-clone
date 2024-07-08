@@ -69,7 +69,7 @@ public class PlaylistService {
     public PlaylistResponseDTO statusPlaylist(Integer playlistId, PlaylistStatus status) {
         PlaylistEntity playlist = getPlaylist(playlistId);
         ProfileEntity profile = SecurityUtil.getProfile();
-        if(profile.getRole().equals(ProfileRole.ROLE_ADMIN)){
+        if (profile.getRole().equals(ProfileRole.ROLE_ADMIN)) {
             playlist.setStatus(status);
             playlistRepository.save(playlist);
             return toDTO(playlist);
@@ -79,7 +79,7 @@ public class PlaylistService {
             playlistRepository.save(playlist);
             return toDTO(playlist);
         }
-       throw new AppBadException("playlist does not exist");
+        throw new AppBadException("playlist does not exist");
     }
 
     // 4. Delete Playlist (USER and OWNER, ADMIN)
@@ -88,11 +88,11 @@ public class PlaylistService {
         ProfileEntity profile = SecurityUtil.getProfile();
         if (profile.getRole().equals(ProfileRole.ROLE_ADMIN)) {
             playlistRepository.delete(playlist);
-            return new Result(playlist.getName()+" listi o'chirildi",true);
+            return new Result(playlist.getName() + " listi o'chirildi", true);
         }
         if (profile.getId().equals(playlist.getProfileId())) {
             playlistRepository.delete(playlist);
-            return new Result(playlist.getName()+" listi o'chirildi",true);
+            return new Result(playlist.getName() + " listi o'chirildi", true);
         }
         throw new AppBadException("playlist does not exist");
     }
@@ -103,13 +103,13 @@ public class PlaylistService {
         if (!profile.getRole().equals(ProfileRole.ROLE_ADMIN)) {
             throw new AppBadException("profile does not have ROLE_ADMIN");
         }
-        Pageable pageable= PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, size);
 
-        Page<PlayListInfoMapper> playListInfoMappers=playlistRepository.listPlaylistPage(pageable);
+        Page<PlayListInfoMapper> playListInfoMappers = playlistRepository.listPlaylistPage(pageable);
 
-        List<PlaylistResponseDTO> playListResponseDTOs=playListInfoMappers.stream().map(this::toShortInfo).toList();
+        List<PlaylistResponseDTO> playListResponseDTOs = playListInfoMappers.stream().map(this::toShortInfo).toList();
 
-        return new PageImpl<>(playListResponseDTOs,pageable,playListInfoMappers.getTotalElements());
+        return new PageImpl<>(playListResponseDTOs, pageable, playListInfoMappers.getTotalElements());
     }
 
     // 6. Playlist List By UserId (order by order number desc) (ADMIN) PlayListInfo
@@ -164,7 +164,7 @@ public class PlaylistService {
 
     }
 
-    public PlaylistResponseDTO toShortInfo(PlayListInfoMapper  playListInfoMapper) {
+    public PlaylistResponseDTO toShortInfo(PlayListInfoMapper playListInfoMapper) {
         PlaylistResponseDTO playlistResponseDTO = new PlaylistResponseDTO();
         playlistResponseDTO.setId(playListInfoMapper.getPlaylistId());
         playlistResponseDTO.setName(playListInfoMapper.getPlaylistName());
@@ -186,4 +186,24 @@ public class PlaylistService {
     }
 
 
+    public PlaylistResponseDTO getPlaylistResponseDTO(Integer playlistId) {
+        PlaylistEntity playlistEntity = getPlaylist(playlistId);
+        PlaylistResponseDTO playlistResponseDTO = new PlaylistResponseDTO();
+        playlistResponseDTO.setId(playlistEntity.getId());
+        playlistResponseDTO.setName(playlistEntity.getName());
+        return playlistResponseDTO;
+    }
+
+    public List<PlaylistResponseDTO> getByChannelId(String channelId) {
+        List<PlaylistEntity> playlistEntityList = playlistRepository.findAllByChannelIdAndStatus(channelId, PlaylistStatus.PUBLIC);
+       List<PlaylistResponseDTO> result = playlistEntityList
+                .stream()
+                .map(playlistEntity -> {
+                    PlaylistResponseDTO playlistResponseDTO = new PlaylistResponseDTO();
+                    playlistResponseDTO.setId(playlistEntity.getId());
+                    playlistResponseDTO.setName(playlistEntity.getName());
+                    return playlistResponseDTO;
+                }).toList();
+       return result;
+    }
 }
