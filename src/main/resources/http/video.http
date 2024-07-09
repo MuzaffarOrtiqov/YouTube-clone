@@ -1,14 +1,14 @@
 ### CREATE VIDEO
 POST localhost:8080/video/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAxNzM2OTEsImlkIjoyLCJ1c2VybmFtZSI6Im9ydGlxb3ZtdXphZmZhcjE3MUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMjYwMDkxLCJpc3MiOiJLdW5VelRlc3QifQ.4esDlZUlA35n35rmUQ97jzFOErd5TXSwKqyuMLAqZpsKjUMujERYw6iamWiEQNfYZvg0C1rN7gzoodrsatYrZg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA0ODU2NDcsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwNTcyMDQ3LCJpc3MiOiJLdW5VelRlc3QifQ.q1qwJknG3vXaFw318Jdwsn5F9oPZAljUqFgyWOwKFnihu5HTuUVj7cdUXPI6LwqfMoFkZODh0V7AIeq8R644SA
 
 {
-  "title": "Dasturlash sirlari",
-  "categoryId": 1,
-  "attachId": "6f4d527d-8c09-41fc-82f0-6a15d3cffdbe.mp4",
+  "title": "Dasturlash uchun",
+  "categoryId": 2,
+  "attachId": "73f94500-10a3-4522-93ab-43edbaddd2e6.jpg",
    "type": "VIDEO",
-  "channelId": "d00293c7-fe3f-4213-a580-24dcb5c736ec",
+  "channelId": "a421c930-a734-4685-9366-ca19454300b7",
   "tags": [1,2]
 }
 

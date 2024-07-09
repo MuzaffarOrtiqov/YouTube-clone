@@ -1,11 +1,11 @@
 POST localhost:8080/attach/upload
 Content-Type:multipart/form-data; boundary=WebAppBoundary
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwNzg0NzksImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MjAxNjQ4NzksImlzcyI6Ikt1blV6VGVzdCJ9.2IO07Un63P1ds5HpfGWyVRKHxfETrUCvgCinkHhJhtglE_dhY3g5rTtwphTuQOdsqY_JcifQoZ4Mgm6cJLLKWw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAzMjYyMTAsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwNDEyNjEwLCJpc3MiOiJLdW5VelRlc3QifQ.bTY9nv8MgpJsyJWH2McKNpjAqHt6YbnfaMmIiWM9k4vJGUNgaZkiTrHMzcVFw2UxeDniID0qsvyb5YehR_2Mfg
 
 --WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="testvideo.mp4"
+Content-Disposition: form-data; name="file"; filename="TESTVIDEO2.mp4"
 
-< C:\Users\HP\Desktop\test\testvideo.mp4
+< C:\Users\Urinov Shokirjon\Desktop\TESTVIDEO2.mp4
 
 ### LOAD FILE
 GET localhost:8080/attach/open/7509d905-777b-45ba-b9c0-450f8e730c37.mp4
