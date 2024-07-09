@@ -9,6 +9,7 @@ import uz.urinov.youtube.enums.ChannelStatus;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Setter
 @Getter
@@ -49,5 +50,7 @@ public class ChannelEntity {
 
     @Column(name = "create_date")
     private LocalDateTime createDate=LocalDateTime.now();
+
+    
 
 }

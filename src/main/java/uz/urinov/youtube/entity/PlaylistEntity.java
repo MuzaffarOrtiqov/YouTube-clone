@@ -46,5 +46,6 @@ public class PlaylistEntity {
     @Column(name = "create_date")
     private LocalDateTime created=LocalDateTime.now();
 
+
 }
 //  id,channel_id,name,description,status(private,public),order_num

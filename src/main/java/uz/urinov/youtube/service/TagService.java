@@ -87,6 +87,9 @@ public class TagService {
 
     public TagDTO getTagDTOById (Integer id){
         TagEntity tag = getTag(id);
-        return toDTO(tag);
+        TagDTO dto = new TagDTO();
+        dto.setId(tag.getId());
+        dto.setName(tag.getName());
+        return dto;
     }
 }

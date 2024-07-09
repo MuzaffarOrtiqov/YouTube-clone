@@ -112,6 +112,21 @@ public class ProfileService {
         profileResponseDTO.setCreateDate(profileEntity.getCreateDate());
         return profileResponseDTO;
     }
+    public ProfileResponseDTO getProfileResponseDTO(Integer profileId) {
+        ProfileEntity profileEntity = getProfile(profileId);
+        ProfileResponseDTO profileResponseDTO = new ProfileResponseDTO();
+        profileResponseDTO.setId(profileEntity.getId());
+        profileResponseDTO.setName(profileEntity.getName());
+        profileResponseDTO.setSurname(profileEntity.getSurname());
+        return profileResponseDTO;
+    }
+    public ProfileEntity getProfile(Integer profileId) {
+        Optional<ProfileEntity> optional = profileRepository.findById(profileId);
+        if (optional.isEmpty()){
+            throw new AppBadException("Profile not found");
+        }
+        return optional.get();
+    }
 
 
 }

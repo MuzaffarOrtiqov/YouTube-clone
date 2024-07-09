@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public interface VideoRepository extends CrudRepository<VideoEntity, String> {
 
-    @Query(value = "FROM VideoEntity  AS v WHERE v.attachId=?1")
+    @Query("FROM VideoEntity  AS v WHERE v.attachId=?1")
     Optional<VideoEntity> findByAttachId(String attachId);
 
     @Query(value = "select c.profile_id from video as v " +
@@ -27,28 +27,36 @@ public interface VideoRepository extends CrudRepository<VideoEntity, String> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE VideoEntity AS v SET v.status=:status, v.publishedDate=current_timestamp WHERE v.attachId =:attachId")
+    @Query("UPDATE VideoEntity AS v SET v.status=:status, v.publishedDate=current_timestamp WHERE v.attachId =:attachId AND v.visible=true ")
     void updateStatus(String attachId, VideoStatus status);
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE VideoEntity AS v SET v.viewCount = COALESCE(v.viewCount ,0)+1 WHERE v.attachId=?1")
+    @Query("UPDATE VideoEntity AS v SET v.viewCount = COALESCE(v.viewCount ,0)+1 WHERE v.attachId=?1")
     void increaseViewCount(String attachId);
 
    /*id,title, preview_attach(id,url),
                    published_date, channel(id,name,photo(url)),
                    view_count,duration*/
-    @Query(value ="SELECT v FROM VideoEntity AS v " +
+    @Query("SELECT v FROM VideoEntity AS v " +
             "INNER JOIN  AttachEntity AS a ON v.attachId=a.id " +
             "INNER JOIN ChannelEntity AS c ON v.channelId=c.id " +
             "WHERE v.categoryId=?1")
     Page<VideoEntity> pagination(Integer categoryId, Pageable pageable);
 
     @Query(value = "FROM VideoEntity AS v WHERE v.title LIKE %?1%")
-    List<VideoEntity> findByTile(String title);
+    List<VideoEntity> findByTitle(String title);
 
-    @Query(value = "FROM VideoEntity AS v INNER JOIN VideoTagEntity AS vt ON v.id = vt.videoId WHERE vt.tagId=?1" )
+    @Query("FROM VideoEntity AS v INNER JOIN VideoTagEntity AS vt ON v.id = vt.videoId WHERE vt.tagId=?1" )
     Page<VideoEntity> paginationWithTagId(Integer tagId, Pageable pageable);
 
+    @Query("FROM VideoEntity AS v  " +
+            "INNER JOIN v.channel AS ch " +
+            "INNER JOIN ch.profile AS p " +
+            "INNER JOIN PlaylistEntity AS pl ON pl.channelId=ch.id " +
+            "WHERE v.visible=true ")
+    Page<VideoEntity> findAll(Pageable pageable);
 
+    @Query("FROM VideoEntity AS v INNER JOIN v.channel AS c WHERE c.id=?1 AND v.visible=true ")
+    Page<VideoEntity> findAllVideosById(String channelId,Pageable pageable);
 }
