@@ -81,7 +81,13 @@ public class PlaylistController {
         return ResponseEntity.ok(responseDTOList);
     }
 
-
+    // 9.Get Playlist by id
+    // id,name,video_count, total_view_count (shu play listdagi videolarni ko'rilganlar soni), last_update_date
+     @GetMapping("/getId/{id}")
+    public ResponseEntity<PlaylistResponseDTO> getPlaylistById(@PathVariable("id") Integer id) {
+        PlaylistResponseDTO playlistResponseDTO=playlistService.getPlaylistById(id);
+        return ResponseEntity.ok(playlistResponseDTO);
+     }
 
 
 }

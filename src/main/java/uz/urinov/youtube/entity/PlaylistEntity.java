@@ -40,6 +40,9 @@ public class PlaylistEntity {
     @JoinColumn(name = "profile_id", insertable = false, updatable = false)
     private ProfileEntity profile;
 
+    @Column(name = "video_count")
+    private Integer videoCount;
+
     @Column(name = "create_date")
     private LocalDateTime created=LocalDateTime.now();
 

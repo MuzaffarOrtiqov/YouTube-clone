@@ -18,11 +18,10 @@ public class PlaylistResponseDTO {
     private String name;
     private String description;
     private PlaylistStatus status;
-//    private String channelId;
-//    private String channelName;
-//    private Integer profileId;
+    private Integer videoCount;
     private ProfileResponseDTO profile;
     private ChannelResponseDTO channel;
     private LocalDateTime created;
+    private Long  playlistTotalViewCount;
 
 }

@@ -18,6 +18,8 @@ import uz.urinov.youtube.enums.ProfileRole;
 import uz.urinov.youtube.exp.AppBadException;
 import uz.urinov.youtube.mapper.PlayListInfoMapper;
 import uz.urinov.youtube.repository.PlaylistRepository;
+import uz.urinov.youtube.repository.PlaylistVideoRepository;
+import uz.urinov.youtube.repository.VideoRepository;
 import uz.urinov.youtube.util.Result;
 import uz.urinov.youtube.util.SecurityUtil;
 
@@ -31,7 +33,8 @@ public class PlaylistService {
     private PlaylistRepository playlistRepository;
     @Autowired
     private ChannelService channelService;
-
+   @Autowired
+   private PlaylistVideoRepository playlistVideoRepository;
     //    1. Create Playlist (USER)
     public PlaylistResponseDTO createPlaylist(PlaylistCreateDTO dto) {
         channelService.get(dto.getChannelId());
@@ -46,6 +49,7 @@ public class PlaylistService {
         playlistEntity.setOrderNum(dto.getOrderNum());
         playlistEntity.setChannelId(dto.getChannelId());
         playlistEntity.setProfileId(SecurityUtil.getProfileId());
+        playlistEntity.setVideoCount(0);
         playlistEntity = playlistRepository.save(playlistEntity);
         return toDTO(playlistEntity);
     }
@@ -136,6 +140,19 @@ public class PlaylistService {
         return playlistEntityList.stream().map(this::toDTO).toList();
     }
 
+    // 9.Get Playlist by id
+    // id,name,video_count, total_view_count (shu play listdagi videolarni ko'rilganlar soni), last_update_date
+    public PlaylistResponseDTO getPlaylistById(Integer id) {
+        PlaylistEntity playlist = getPlaylist(id);
+        Long count = playlistVideoRepository.viewCountByPlaylistId(id);
+        PlaylistResponseDTO playlistResponseDTO = new PlaylistResponseDTO();
+        playlistResponseDTO.setId(id);
+        playlistResponseDTO.setName(playlist.getName());
+        playlistResponseDTO.setVideoCount(playlist.getVideoCount());
+        playlistResponseDTO.setPlaylistTotalViewCount(count);
+        return playlistResponseDTO;
+    }
+
     public PlaylistResponseDTO toDTO(PlaylistEntity entity) {
         PlaylistResponseDTO playlistResponseDTO = new PlaylistResponseDTO();
         playlistResponseDTO.setId(entity.getId());
@@ -143,6 +160,7 @@ public class PlaylistService {
         playlistResponseDTO.setDescription(entity.getDescription());
         playlistResponseDTO.setStatus(entity.getStatus());
         playlistResponseDTO.setOrderNum(entity.getOrderNum());
+        playlistResponseDTO.setVideoCount(entity.getVideoCount());
 
         ChannelResponseDTO channelResponseDTO = new ChannelResponseDTO();
         channelResponseDTO.setId(entity.getChannelId());

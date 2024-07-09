@@ -1,6 +1,7 @@
 package uz.urinov.youtube.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,20 @@ import uz.urinov.youtube.service.AttachService;
 @Slf4j
 @RequestMapping("/attach")
 @RestController
+@SecurityRequirement(name = "Authorization")
 @Tag(name = "Api for attach", description = "List of APIs for attach ")
 public class AttachController {
     @Autowired
     private AttachService attachService;
 
-    @PostMapping("/upload")
+    //    @PostMapping("/upload")
+    @RequestMapping(
+            path = "/upload",
+            method = RequestMethod.POST,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     @Operation(summary = "Upload file", description = "Api to upload a video, photo and other")
-    public ResponseEntity<AttachDTO> upload(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<AttachDTO> upload(@RequestPart("file") MultipartFile file) {
         log.info("Uploading file {}", file.getOriginalFilename());
         AttachDTO response = attachService.saveAttach(file);
         return ResponseEntity.ok(response);

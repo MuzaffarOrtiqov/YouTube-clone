@@ -42,5 +42,4 @@ public interface PlaylistRepository extends CrudRepository<PlaylistEntity,Intege
     List<PlaylistEntity> findAllByChannelIdAndStatus(String channelId, PlaylistStatus status);
 
 
-
 }
