@@ -169,7 +169,7 @@ public class VideoService {
         videoDTO.setPreviewAttach(attachService.getDTOWithURL(videoEntity.getPreviewAttachId()));
         videoDTO.setAttach(attachService.getDTOWithURL(videoEntity.getAttachId()));
         videoDTO.setCategory(categoryService.getCategoryDTOById(videoEntity.getCategoryId()));
-        videoDTO.setTagIdList(videoTagService.findTagDtoListByVideoId(videoEntity.getId()));   //TODO tag name ni chiqarish kk
+        videoDTO.setTagIdList(videoTagService.findTagDtoListByVideoId(videoEntity.getId()));
         videoDTO.setPublishedDate(videoEntity.getPublishedDate());
         videoDTO.setChannel(channelService.getChannelDTOByChannelId(videoEntity.getChannelId()));
         videoDTO.setViewCount(videoEntity.getViewCount());
