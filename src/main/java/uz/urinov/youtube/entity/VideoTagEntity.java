@@ -1,14 +1,13 @@
 package uz.urinov.youtube.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "video_tag")
 public class VideoTagEntity {
@@ -28,8 +27,9 @@ public class VideoTagEntity {
     @JoinColumn(name = "tag_id",insertable=false,updatable=false)
     private TagEntity tag;
 
+    @CreationTimestamp
     @Column(name = "created_date")
-    private LocalDateTime createdDate=LocalDateTime.now();
+    private LocalDateTime createdDate;
 
 
 }
