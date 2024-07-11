@@ -1,0 +1,27 @@
+### 1. Create repost (USER)
+POST http://localhost:8080/report/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA2Nzk3NDYsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwNzY2MTQ2LCJpc3MiOiJLdW5VelRlc3QifQ.lJiAJBUuKS3nAc_35CLQiTDAkfOJ5ZguNd8gTujoNqKF7K_Ar5_onVzxgyt5Cvuqs6dsbOphb4FBeLkhMPB4PA
+Content-Type: application/json
+
+{
+  "content": "Bunaqa kanalllarni yopish kerak",
+  "entityId": "a421c930-a734-4685-9366-ca19454300b7",
+  "status": "CHANNEL"
+}
+### 2. ReportList Pagination ADMIN ReportInfo
+GET http://localhost:8080/report/pagination
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA2ODIxMDgsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwNzY4NTA4LCJpc3MiOiJLdW5VelRlc3QifQ.UINTifXkt9ijzKmemdPqhWT80NRxTkl-qYh_Sy6cDKjXFrkZehcad9YlycGJvDICuzbMyzkl1mKe3u8nPt-Fyg
+
+page=1&
+size=2
+
+<> 2024-07-11T121919.400.json
+<> 2024-07-11T121910.400.json
+
+### 3. Remove Report by id (ADMIN)
+GET http://localhost:8080/report/get-by-id/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA2ODIxMDgsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwNzY4NTA4LCJpc3MiOiJLdW5VelRlc3QifQ.UINTifXkt9ijzKmemdPqhWT80NRxTkl-qYh_Sy6cDKjXFrkZehcad9YlycGJvDICuzbMyzkl1mKe3u8nPt-Fyg
+
+### 4. Report List By User id (ADMIN) ReportInfo
+GET http://localhost:8080/report/get-by-user-id/2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA2ODIxMDgsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwNzY4NTA4LCJpc3MiOiJLdW5VelRlc3QifQ.UINTifXkt9ijzKmemdPqhWT80NRxTkl-qYh_Sy6cDKjXFrkZehcad9YlycGJvDICuzbMyzkl1mKe3u8nPt-Fyg
