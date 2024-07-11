@@ -1,0 +1,27 @@
+### 1. Create Comment like (1 va 2)
+POST http://localhost:8080/comment-like/like-dislike
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA1OTM0MjMsImlkIjozLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MjA2Nzk4MjMsImlzcyI6Ikt1blV6VGVzdCJ9.0WYlrqV9JPSCnNg5UoV2sHCnOs_iBMQuOfPjg6Y3Uo9SPLFqm4HhRRkeS4I8lRZyzj0SWKIBFhXsSPI_bbvgTQ
+Content-Type: application/json
+
+{
+  "commentId": 1,
+  "status": "LIKE"
+}
+
+<> 2024-07-09T170712.200.json
+<> 2024-07-09T165931.200.json
+<> 2024-07-09T165144.200.json
+<> 2024-07-09T165124.200.json
+<> 2024-07-09T164939.200.json
+<> 2024-07-09T163928.200.json
+<> 2024-07-09T163836.200.json
+<> 2024-07-09T163740.200.json
+<> 2024-07-09T160057.200.json
+
+###  3. User Liked Video List (order by created_date desc) (USER) VideoLikeInfo
+GET http://localhost:8080/comment-like/user-liked-comment-list
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA1MjIwNTIsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwNjA4NDUyLCJpc3MiOiJLdW5VelRlc3QifQ.CKjLocMxfeFoeHktGIlS-GEiaA4GWn4uey_hB2b9fBl6MDbMMk9OfOASJ_pQlHxNdM5zSBi_df119Hc6ACHFsA
+
+###  4. Get User LikedComment List By UserId (ADMIN) CommentLikeInfo
+GET http://localhost:8080/comment-like/user-liked-comment-list-userId/2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA1OTE2NTMsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwNjc4MDUzLCJpc3MiOiJLdW5VelRlc3QifQ.eb7ZwbjW0Bbkn9L76__V6LhEc7Te5jd6qk3_bgIH-KHqz5PhVCyymG1w_IXDY8G-uBNr8BhztKo2I4WqL8cHVA

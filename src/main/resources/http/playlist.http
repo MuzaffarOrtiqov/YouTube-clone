@@ -1,13 +1,13 @@
 ### 1. Create Playlist (USER)
 POST http://localhost:8080/playlist/create
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAzNDk2MjAsImlkIjoxLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MjA0MzYwMjAsImlzcyI6Ikt1blV6VGVzdCJ9.alS40KATn16PM5JGXuHagv_49eR9WdyAso6-_SHhOChTNmVcYmE6Dy5RAvuz_1tC_9C6o6By55bfHXMINYr80A
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA0ODU2NDcsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwNTcyMDQ3LCJpc3MiOiJLdW5VelRlc3QifQ.q1qwJknG3vXaFw318Jdwsn5F9oPZAljUqFgyWOwKFnihu5HTuUVj7cdUXPI6LwqfMoFkZODh0V7AIeq8R644SA
 Content-Type: application/json
 
 {
-  "name": "Spring boot",
-  "description": "Spring boot bo'limlari haqida",
-  "orderNum": 1,
-  "channelId": "0cc55e68-2eba-46f0-826a-c77afa452819",
+  "name": "Bohorgi sapok",
+  "description": "Spring Rest bo'limlari haqida",
+  "orderNum": 3,
+  "channelId": "a421c930-a734-4685-9366-ca19454300b7",
   "status": "PUBLIC"
 }
 
@@ -44,14 +44,17 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwNzE1NzksImlkIjozLCJ1c
     size=3
 
 ### // 6. Playlist List By UserId (order by order number desc) (ADMIN) PlayListInfo
-GET http://localhost:8080/playlist/list-userId/1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAyNjAyNTgsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwMzQ2NjU4LCJpc3MiOiJLdW5VelRlc3QifQ.NWRDyYSv2tCQk-OfF_8ccR9_Avo-4DgJ-ybGFvTwC-fuZ9sTAVvtU1688pSBW1IL8Z_nHCyrN4Y2HHw-jbIfjA
-
+GET http://localhost:8080/playlist/list-userId/2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAzNDkzNDUsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwNDM1NzQ1LCJpc3MiOiJLdW5VelRlc3QifQ.WWDEh16uFrSn4k0FbxtJ5ImDQUIL5_0dg2jV7QDLPZcbaH5b4w5o4Uw5T-nh75RHou735H_OBO8A3yNiVtUxXA
 
 ### // 7. Get User Playlist (order by order number desc) (murojat qilgan user ni) PlayListShortInfo
 GET http://localhost:8080/playlist/list-user
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwOTM2NjYsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwMTgwMDY2LCJpc3MiOiJLdW5VelRlc3QifQ.Ohy6KjtHl0d7NMzDeiPPLNgcqjk45JeMnVsP4fYajoi-V3WzyOuADn1veXSf_jOieXxvQ6pIGdZQ3-L0eKqi8g
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA2NjY3MjEsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwNzUzMTIxLCJpc3MiOiJLdW5VelRlc3QifQ.Xxa6psQPmOPHmCDHmbL0UUX-cJQbrUhirY63pr4HKp0KZR0HOuN3L5jSOa6y2ZVxBmUnLwli-zWRqnvnkRiADA
 
 ### // 8. Get Channel Play List By ChannelKey (order by order_num desc) (only Public) PlayListShortInfo
-GET http://localhost:8080/playlist/list-user-all/6336e5fb-5ee1-4e81-af57-cd983cf17b25
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAwOTQ1MzYsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjNAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTcyMDE4MDkzNiwiaXNzIjoiS3VuVXpUZXN0In0.uvVniIl42omrBx7TWpFWQubrrPmWfC4Lan2aglwbyPJRWkNYq2bTgPDyvXl--XKBePhkwHHFzDXABDt5Lei1dg
+GET http://localhost:8080/playlist/list-user-all/a421c930-a734-4685-9366-ca19454300b7
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA2NjY3MjEsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwNzUzMTIxLCJpc3MiOiJLdW5VelRlc3QifQ.Xxa6psQPmOPHmCDHmbL0UUX-cJQbrUhirY63pr4HKp0KZR0HOuN3L5jSOa6y2ZVxBmUnLwli-zWRqnvnkRiADA
+
+### // 9.Get Playlist by id  (id,name,video_count, total_view_count (shu play listdagi videolarni ko'rilganlar soni)), last_update_date
+GET http://localhost:8080/playlist/getId/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjAzMzQyNTAsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwNDIwNjUwLCJpc3MiOiJLdW5VelRlc3QifQ.QLvdRp3V8Pznyi1rGtONQO5-eH6IVGj-lPHx3BobIWRdu62Cf9CH7GL-kY79YLewDx0qHq6SS8Ct7jGJdJIJxw

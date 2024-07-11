@@ -56,6 +56,7 @@ public class SecurityConfig {
                     authorizationManagerRequestMatcherRegistry
                             .requestMatchers("/auth/**").permitAll()
                             .requestMatchers("/playlist/**").permitAll()
+                            .requestMatchers("/video/**").permitAll()
                             .requestMatchers("/v3/api-docs/**","/swagger-ui/**").permitAll()
                             .requestMatchers("/profile/adm/**").hasRole("ADMIN")
                             .requestMatchers("/category/adm/**").hasRole("ADMIN")

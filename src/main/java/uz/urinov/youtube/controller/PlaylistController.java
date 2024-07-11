@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uz.urinov.youtube.dto.playlist.PlayListShortInfoDTO;
 import uz.urinov.youtube.dto.playlist.PlaylistCreateDTO;
 import uz.urinov.youtube.dto.playlist.PlaylistResponseDTO;
 import uz.urinov.youtube.dto.playlist.PlaylistUpdateDTO;
@@ -69,19 +70,25 @@ public class PlaylistController {
 
      // 7. Get User Playlist (order by order number desc) (murojat qilgan user ni) PlayListShortInfo
     @GetMapping("/list-user")
-    public ResponseEntity<List<PlaylistResponseDTO>> listPlaylistByUser() {
-        List<PlaylistResponseDTO> responseDTOList=playlistService.listPlaylistByUser();
+    public ResponseEntity<List<PlayListShortInfoDTO>> listPlaylistByUser() {
+        List<PlayListShortInfoDTO> responseDTOList=playlistService.listPlaylistByUser();
         return ResponseEntity.ok(responseDTOList);
     }
 
     // 8. Get Channel Play List By ChannelKey (order by order_num desc) (only Public) PlayListShortInfo
     @GetMapping("/list-user-all/{channelId}")
-    public ResponseEntity<List<PlaylistResponseDTO>> listPlaylistByUserAll(@PathVariable String channelId) {
-        List<PlaylistResponseDTO> responseDTOList=playlistService.listPlaylistByUserAll(channelId);
+    public ResponseEntity<List<PlayListShortInfoDTO>> listPlaylistByUserAll(@PathVariable String channelId) {
+        List<PlayListShortInfoDTO> responseDTOList=playlistService.listPlaylistByUserAll(channelId);
         return ResponseEntity.ok(responseDTOList);
     }
 
-
+    // 9.Get Playlist by id
+    // id,name,video_count, total_view_count (shu play listdagi videolarni ko'rilganlar soni), last_update_date
+     @GetMapping("/getId/{id}")
+    public ResponseEntity<PlaylistResponseDTO> getPlaylistById(@PathVariable("id") Integer id) {
+        PlaylistResponseDTO playlistResponseDTO=playlistService.getPlaylistById(id);
+        return ResponseEntity.ok(playlistResponseDTO);
+     }
 
 
 }
