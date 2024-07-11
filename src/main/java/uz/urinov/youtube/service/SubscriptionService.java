@@ -11,8 +11,6 @@ import uz.urinov.youtube.exp.AppBadException;
 import uz.urinov.youtube.repository.SubscriptionRepository;
 import uz.urinov.youtube.util.SecurityUtil;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 

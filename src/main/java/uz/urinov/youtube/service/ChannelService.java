@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import uz.urinov.youtube.dto.ChannelShortInfo;
 import uz.urinov.youtube.dto.attach.AttachDTO;
 import uz.urinov.youtube.dto.channel.ChannelCreateDTO;
 import uz.urinov.youtube.dto.channel.ChannelResponseDTO;
@@ -166,4 +167,14 @@ public class ChannelService {
     }
 
 
+    public ChannelShortInfo getChannelShortInfoById(String id) {
+        Optional<ChannelEntity> byId = channelRepository.findById(id);
+        if (byId.isEmpty()) {
+            throw new AppBadException("Channel id not found");
+        }
+        ChannelShortInfo channelShortInfo = new ChannelShortInfo();
+        channelShortInfo.setId(byId.get().getId());
+        channelShortInfo.setName(byId.get().getName());
+        return channelShortInfo;
+    }
 }
