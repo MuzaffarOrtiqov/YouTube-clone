@@ -7,19 +7,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import uz.urinov.youtube.dto.channel.ChannelResponseDTO;
-import uz.urinov.youtube.dto.playlist.PlaylistCreateDTO;
-import uz.urinov.youtube.dto.playlist.PlaylistResponseDTO;
-import uz.urinov.youtube.dto.playlist.PlaylistUpdateDTO;
+import uz.urinov.youtube.dto.playlist.*;
 import uz.urinov.youtube.dto.profile.ProfileResponseDTO;
+import uz.urinov.youtube.dto.video.VideoShortDTO;
 import uz.urinov.youtube.entity.PlaylistEntity;
 import uz.urinov.youtube.entity.ProfileEntity;
 import uz.urinov.youtube.enums.PlaylistStatus;
 import uz.urinov.youtube.enums.ProfileRole;
 import uz.urinov.youtube.exp.AppBadException;
 import uz.urinov.youtube.mapper.PlayListInfoMapper;
+import uz.urinov.youtube.mapper.PlaylistVideoInfoMapper;
 import uz.urinov.youtube.repository.PlaylistRepository;
 import uz.urinov.youtube.repository.PlaylistVideoRepository;
-import uz.urinov.youtube.repository.VideoRepository;
 import uz.urinov.youtube.util.Result;
 import uz.urinov.youtube.util.SecurityUtil;
 
@@ -33,8 +32,9 @@ public class PlaylistService {
     private PlaylistRepository playlistRepository;
     @Autowired
     private ChannelService channelService;
-   @Autowired
-   private PlaylistVideoRepository playlistVideoRepository;
+    @Autowired
+    private PlaylistVideoRepository playlistVideoRepository;
+
     //    1. Create Playlist (USER)
     public PlaylistResponseDTO createPlaylist(PlaylistCreateDTO dto) {
         channelService.get(dto.getChannelId());
@@ -127,17 +127,17 @@ public class PlaylistService {
     }
 
     // 7. Get User Playlist (order by order number desc) (murojat qilgan user ni) PlayListShortInfo
-    public List<PlaylistResponseDTO> listPlaylistByUser() {
+    public List<PlayListShortInfoDTO> listPlaylistByUser() {
         ProfileEntity profile = SecurityUtil.getProfile();
         List<PlaylistEntity> playlistEntityList = playlistRepository.findAllByProfileId(profile.getId());
-        return playlistEntityList.stream().map(this::toDTO).toList();
+        return playlistEntityList.stream().map(this::toShortDTO).toList();
     }
 
     // 8. Get Channel Play List By ChannelKey (order by order_num desc) (only Public) PlayListShortInfo
-    public List<PlaylistResponseDTO> listPlaylistByUserAll(String channelId) {
+    public List<PlayListShortInfoDTO> listPlaylistByUserAll(String channelId) {
 
         List<PlaylistEntity> playlistEntityList = playlistRepository.findAllByChannelIdAndStatus(channelId, PlaylistStatus.PUBLIC);
-        return playlistEntityList.stream().map(this::toDTO).toList();
+        return playlistEntityList.stream().map(this::toShortDTO).toList();
     }
 
     // 9.Get Playlist by id
@@ -182,6 +182,29 @@ public class PlaylistService {
 
     }
 
+    public PlayListShortInfoDTO toShortDTO(PlaylistEntity entity) {
+
+        PlayListShortInfoDTO playlistShortDTO = new PlayListShortInfoDTO();
+        playlistShortDTO.setId(entity.getId());
+        playlistShortDTO.setName(entity.getName());
+        playlistShortDTO.setVideoCount(entity.getVideoCount());
+        playlistShortDTO.setCreated(entity.getCreated());
+
+        ChannelShortInfoDTO channelResponseDTO = new ChannelShortInfoDTO();
+        channelResponseDTO.setId(entity.getChannelId());
+        channelResponseDTO.setName(entity.getChannel().getName());
+
+        playlistShortDTO.setChannel(channelResponseDTO);
+
+        List<PlaylistVideoInfoMapper> listByPlayListId = playlistVideoRepository.getVideoListByPlayListId(entity.getId());
+        List<VideoShortDTO> videoShortDTOList = listByPlayListId.stream().map(this::toVideoShortDTO).toList();
+
+        playlistShortDTO.setVideoList(videoShortDTOList);
+
+
+        return playlistShortDTO;
+    }
+
     public PlaylistResponseDTO toShortInfo(PlayListInfoMapper playListInfoMapper) {
         PlaylistResponseDTO playlistResponseDTO = new PlaylistResponseDTO();
         playlistResponseDTO.setId(playListInfoMapper.getPlaylistId());
@@ -195,6 +218,17 @@ public class PlaylistService {
         playlistResponseDTO.setCreated(playListInfoMapper.getPlaylistCreated());
 
         return playlistResponseDTO;
+
+    }
+
+    public VideoShortDTO toVideoShortDTO(PlaylistVideoInfoMapper playListVideoMapper) {
+        VideoShortDTO videoShortDTO = new VideoShortDTO();
+
+        videoShortDTO.setId(playListVideoMapper.getVideoId());
+        videoShortDTO.setVideoTitle(playListVideoMapper.getVideoTitle());
+        videoShortDTO.setDuration(playListVideoMapper.getDuration());
+
+        return videoShortDTO;
 
     }
 
@@ -214,7 +248,7 @@ public class PlaylistService {
 
     public List<PlaylistResponseDTO> getByChannelId(String channelId) {
         List<PlaylistEntity> playlistEntityList = playlistRepository.findAllByChannelIdAndStatus(channelId, PlaylistStatus.PUBLIC);
-       List<PlaylistResponseDTO> result = playlistEntityList
+        List<PlaylistResponseDTO> result = playlistEntityList
                 .stream()
                 .map(playlistEntity -> {
                     PlaylistResponseDTO playlistResponseDTO = new PlaylistResponseDTO();
@@ -222,6 +256,6 @@ public class PlaylistService {
                     playlistResponseDTO.setName(playlistEntity.getName());
                     return playlistResponseDTO;
                 }).toList();
-       return result;
+        return result;
     }
 }

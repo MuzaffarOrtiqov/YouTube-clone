@@ -5,9 +5,13 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uz.urinov.youtube.dto.playlist.PlaylistResponseDTO;
 import uz.urinov.youtube.dto.playlistVideo.PlaylistVideoCreateDTO;
 import uz.urinov.youtube.service.PlaylistVideoService;
 import uz.urinov.youtube.util.Result;
+
+import java.util.List;
+
 @SecurityRequirement(name = "Authorization")
 @RestController
 @RequestMapping("/playlist-video")
@@ -33,5 +37,12 @@ public class PlaylistVideoController {
          Result result = playlistVideoService.delete(playlistId,videoId);
          return ResponseEntity.status(result.isSuccess() ? 201 : 401).body(result);
      }
+
+     // 4. Get Video list by playListId (video status published) PlaylistVideoInfo
+    @GetMapping("/video-list-playlistId/{playListId}")
+    public ResponseEntity<List<PlaylistResponseDTO>> getPlaylistVideoList(@PathVariable Integer playListId) {
+        List<PlaylistResponseDTO> responseDTO=playlistVideoService.getPlaylistVideoList(playListId);
+        return ResponseEntity.ok(responseDTO);
+    }
 
 }

@@ -6,7 +6,7 @@ public interface PlaylistVideoInfoMapper {
 
     Integer getPlaylistId();
 
-    Integer getVideoId();
+    String getVideoId();
 
     String getPreviewAttachId();
 

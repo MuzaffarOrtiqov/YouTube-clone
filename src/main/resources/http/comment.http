@@ -1,0 +1,62 @@
+### // 1. Crate Comment (USER)
+POST http://localhost:8080/comment/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA1OTI3OTYsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwNjc5MTk2LCJpc3MiOiJLdW5VelRlc3QifQ.1enZOE14raZMhXZ2ryPkmBRqW84b4JSKBHfGROluGPAiwpToJJWrI2b63Am_xzHUHYQja5B4_I9BJdH3FTXx2A
+Content-Type: application/json
+
+{
+  "videoId": "6325e4b1-4bba-4330-bc45-007b915e793d",
+  "content": "Do'stim oyinni ko'rmabsiz",
+  "replyId": 2
+}
+
+### // 1. Crate Comment (USER)
+POST http://localhost:8080/comment/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA1OTM0MjMsImlkIjozLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MjA2Nzk4MjMsImlzcyI6Ikt1blV6VGVzdCJ9.0WYlrqV9JPSCnNg5UoV2sHCnOs_iBMQuOfPjg6Y3Uo9SPLFqm4HhRRkeS4I8lRZyzj0SWKIBFhXsSPI_bbvgTQ
+Content-Type: application/json
+
+{
+  "videoId": "6325e4b1-4bba-4330-bc45-007b915e793d",
+  "content": "Assalomu alekum barchaga bitta fubol uchun tortishmanglar",
+  "replyId": null
+}
+
+
+### 2. Update Comment (USER AND OWNER)
+PUT http://localhost:8080/comment/update
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA1MDk0NDcsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwNTk1ODQ3LCJpc3MiOiJLdW5VelRlc3QifQ.CzZA8N3DURDibM5ikgCFjmvlLCLJmauJH9xllf6DXjwdC84-L-aPnSZ3WBsrRnB-3BSRQM1vJVpqKDy20M2Y4Q
+Content-Type: application/json
+
+{
+  "videoId": "6325e4b1-4bba-4330-bc45-007b915e793d",
+  "content": "Allohga shukur",
+  "replyId": 0
+}
+
+<> 2024-07-09T122502.201.json
+
+### 3. Delete Comment (USER AND OWNER, ADMIN)
+DELETE http://localhost:8080/comment/delete/3
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA1MDk0NDcsImlkIjoyLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNzIwNTk1ODQ3LCJpc3MiOiJLdW5VelRlc3QifQ.CzZA8N3DURDibM5ikgCFjmvlLCLJmauJH9xllf6DXjwdC84-L-aPnSZ3WBsrRnB-3BSRQM1vJVpqKDy20M2Y4Q
+
+<> 2024-07-09T123735.409.json
+<> 2024-07-09T123701.201.json
+<> 2024-07-09T123606.201.json
+
+### 4. Comment List Pagination (ADMIN)
+GET http://localhost:8080/comment/pagination
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA1MTUzMTcsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwNjAxNzE3LCJpc3MiOiJLdW5VelRlc3QifQ.9cjxuRJ9fvonpuMfDIsIMVV6JGwrF8wtMhveOC9NchBiToEI9SKJKZqVoaCA3SV8DU_09KrZu28AP969zT111w
+
+page=1&
+size=3
+
+### 5. Comment List By profileId(ADMIN)
+GET http://localhost:8080/comment/comment-list-by-profileId/2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA1OTI3OTYsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwNjc5MTk2LCJpc3MiOiJLdW5VelRlc3QifQ.1enZOE14raZMhXZ2ryPkmBRqW84b4JSKBHfGROluGPAiwpToJJWrI2b63Am_xzHUHYQja5B4_I9BJdH3FTXx2A
+
+### 6. Comment List By Profile (murojat qilgan odamning comment lari) (USER AND OWNER)
+GET http://localhost:8080/comment/get-comment-list
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA1OTI3OTYsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwNjc5MTk2LCJpc3MiOiJLdW5VelRlc3QifQ.1enZOE14raZMhXZ2ryPkmBRqW84b4JSKBHfGROluGPAiwpToJJWrI2b63Am_xzHUHYQja5B4_I9BJdH3FTXx2A
+
+### 7. Comment List by videoId CommentInfo
+GET http://localhost:8080/comment/comment-list-by-videoId/6325e4b1-4bba-4330-bc45-007b915e793d
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA1OTI3OTYsImlkIjoxLCJ1c2VybmFtZSI6InVyaW5vdnNob2tpcmpvbjkzQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzIwNjc5MTk2LCJpc3MiOiJLdW5VelRlc3QifQ.1enZOE14raZMhXZ2ryPkmBRqW84b4JSKBHfGROluGPAiwpToJJWrI2b63Am_xzHUHYQja5B4_I9BJdH3FTXx2A
