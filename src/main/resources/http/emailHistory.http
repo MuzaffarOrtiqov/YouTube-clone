@@ -1,0 +1,6 @@
+###  // 1. Get email pagination (ADMIN)
+GET http://localhost:8080/email-history/pagination
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MjA3ODA4NzcsImlkIjozLCJ1c2VybmFtZSI6Im11emFmZmFybWlrZTJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE3MjA4NjcyNzcsImlzcyI6Ikt1blV6VGVzdCJ9.iJUSCuwrM8rB-03ityL6n1FGIpO0vINcxWkKfG3CHAi2n9z41PnIEFXN-SE-3FFt4ch470EBIpUGfBLdk9A2_A
+
+    page=1&
+    size=2

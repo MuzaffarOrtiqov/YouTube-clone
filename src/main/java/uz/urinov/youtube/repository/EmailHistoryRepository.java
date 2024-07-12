@@ -1,5 +1,7 @@
 package uz.urinov.youtube.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import uz.urinov.youtube.entity.EmailHistoryEntity;
@@ -16,4 +18,7 @@ public interface EmailHistoryRepository extends CrudRepository<EmailHistoryEntit
 
     @Query("SELECT e.profile FROM EmailHistoryEntity e WHERE e.message=?1")
     Optional<ProfileEntity> findByMessage(String message);
+
+    // 1. Get email pagination (ADMIN)
+    Page<EmailHistoryEntity> findAllBy(Pageable pageable);
 }
