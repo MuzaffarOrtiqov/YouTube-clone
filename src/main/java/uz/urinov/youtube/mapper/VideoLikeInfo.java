@@ -2,11 +2,8 @@ package uz.urinov.youtube.mapper;
 
 import lombok.Getter;
 import lombok.Setter;
-import uz.urinov.youtube.dto.AttachShortInfo;
-import uz.urinov.youtube.dto.VideoShortInfo;
-import uz.urinov.youtube.dto.attach.AttachDTO;
-import uz.urinov.youtube.dto.channel.ChannelResponseDTO;
-import uz.urinov.youtube.dto.video.VideoDTO;
+import uz.urinov.youtube.dto.attach.AttachShortInfo;
+import uz.urinov.youtube.dto.video.VideoShortInfo;
 
 @Getter
 @Setter

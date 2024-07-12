@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import uz.urinov.youtube.dto.ChannelShortInfo;
+import uz.urinov.youtube.dto.channel.ChannelShortInfo;
 import uz.urinov.youtube.dto.attach.AttachDTO;
 import uz.urinov.youtube.dto.channel.ChannelCreateDTO;
 import uz.urinov.youtube.dto.channel.ChannelResponseDTO;
