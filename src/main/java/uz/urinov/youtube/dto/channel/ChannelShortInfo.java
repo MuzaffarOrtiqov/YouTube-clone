@@ -1,4 +1,4 @@
-package uz.urinov.youtube.dto;
+package uz.urinov.youtube.dto.channel;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package uz.urinov.youtube.dto;
+package uz.urinov.youtube.dto.attach;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.NoArgsConstructor;

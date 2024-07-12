@@ -14,7 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import uz.urinov.youtube.dto.AttachShortInfo;
+import uz.urinov.youtube.dto.attach.AttachShortInfo;
 import uz.urinov.youtube.dto.attach.AttachDTO;
 import uz.urinov.youtube.entity.AttachEntity;
 import uz.urinov.youtube.exp.AppBadException;

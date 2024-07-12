@@ -3,7 +3,9 @@ package uz.urinov.youtube.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +36,10 @@ public class VideoLikeController {
     @GetMapping("/user-liked-videos/{userId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "All videos liked by a user")
-    public ResponseEntity<List<VideoLikeInfo>> getUserLikedVideos(@PathVariable Integer userId ) {
+    public ResponseEntity<Page<VideoLikeInfo>> getUserLikedVideos(@PathVariable Integer userId,
+                                                                  @RequestParam(name = "page",defaultValue = "1") int page,
+                                                                  @RequestParam(name = "size",defaultValue = "3") int size) {
         log.info("userLikedVideos called for userId: {}", userId);
-        return ResponseEntity.ok(videoLikeService.getUserLikedVideos(userId));
+        return ResponseEntity.ok(videoLikeService.getUserLikedVideos(userId,page-1,size));
     }
 }

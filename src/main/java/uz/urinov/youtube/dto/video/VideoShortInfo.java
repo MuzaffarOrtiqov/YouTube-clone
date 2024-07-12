@@ -1,6 +1,7 @@
-package uz.urinov.youtube.dto;
+package uz.urinov.youtube.dto.video;
 
 import lombok.Data;
+import uz.urinov.youtube.dto.channel.ChannelShortInfo;
 
 @Data
 public class VideoShortInfo {
