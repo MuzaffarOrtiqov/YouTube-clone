@@ -9,23 +9,18 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import uz.urinov.youtube.dto.attach.AttachDTO;
-import uz.urinov.youtube.dto.channel.ChannelResponseDTO;
+import uz.urinov.youtube.dto.VideoShortInfo;
 import uz.urinov.youtube.dto.playlist.PlaylistResponseDTO;
 import uz.urinov.youtube.dto.profile.ProfileResponseDTO;
-import uz.urinov.youtube.dto.tag.TagDTO;
 import uz.urinov.youtube.dto.video.VideoCreateDTO;
 import uz.urinov.youtube.dto.video.VideoDTO;
 import uz.urinov.youtube.dto.video.VideoUpdateDTO;
-import uz.urinov.youtube.entity.ChannelEntity;
 import uz.urinov.youtube.entity.ProfileEntity;
 import uz.urinov.youtube.entity.VideoEntity;
 import uz.urinov.youtube.enums.ProfileRole;
 import uz.urinov.youtube.enums.VideoStatus;
 import uz.urinov.youtube.exp.AppBadException;
-import uz.urinov.youtube.repository.ChannelRepository;
 import uz.urinov.youtube.repository.VideoRepository;
-import uz.urinov.youtube.repository.VideoTagRepository;
 import uz.urinov.youtube.util.SecurityUtil;
 
 import java.util.LinkedList;
@@ -124,11 +119,10 @@ public class VideoService {
         Pageable pageable = PageRequest.of(page, size);
         Page<VideoEntity> pageObj = videoRepository.paginationWithTagId(tagId, pageable);
         List<VideoDTO> videoDTOList = new LinkedList<>();
-        Long total = pageObj.getTotalElements();
         pageObj.forEach(videoEntity -> {
             videoDTOList.add(toShortInfo(videoEntity));
         });
-        return new PageImpl<>(videoDTOList, pageable, total);
+        return new PageImpl<>(videoDTOList, pageable, pageObj.getTotalElements());
     }
 
     // 8. Get Video By id (If Status PRIVATE allow only for OWNER or ADMIN)
@@ -169,7 +163,7 @@ public class VideoService {
         videoDTO.setPreviewAttach(attachService.getDTOWithURL(videoEntity.getPreviewAttachId()));
         videoDTO.setAttach(attachService.getDTOWithURL(videoEntity.getAttachId()));
         videoDTO.setCategory(categoryService.getCategoryDTOById(videoEntity.getCategoryId()));
-        videoDTO.setTagIdList(videoTagService.findTagDtoListByVideoId(videoEntity.getId()));   //TODO tag name ni chiqarish kk
+        videoDTO.setTagIdList(videoTagService.findTagDtoListByVideoId(videoEntity.getId()));
         videoDTO.setPublishedDate(videoEntity.getPublishedDate());
         videoDTO.setChannel(channelService.getChannelDTOByChannelId(videoEntity.getChannelId()));
         videoDTO.setViewCount(videoEntity.getViewCount());
@@ -260,5 +254,17 @@ public class VideoService {
             throw new AppBadException("User not found");
         }
         return user;
+    }
+
+    public VideoShortInfo getVideoShortInfoById(String videoId, String channelId) {
+        Optional<VideoEntity> byId = videoRepository.findById(videoId);
+        if (byId.isEmpty()) {
+            throw new AppBadException("Video not found");
+        }
+        VideoShortInfo videoShortInfo = new VideoShortInfo();
+        videoShortInfo.setId(byId.get().getId());
+        videoShortInfo.setTitle(byId.get().getTitle());
+        videoShortInfo.setChannelShortInfo(channelService.getChannelShortInfoById(channelId));
+        return videoShortInfo;
     }
 }
