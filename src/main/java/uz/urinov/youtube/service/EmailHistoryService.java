@@ -1,5 +1,6 @@
 package uz.urinov.youtube.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.urinov.youtube.entity.EmailHistoryEntity;
@@ -10,9 +11,9 @@ import uz.urinov.youtube.util.SecurityUtil;
 import java.time.LocalDateTime;
 
 @Service
+@RequiredArgsConstructor
 public class EmailHistoryService {
-    @Autowired
-    private EmailHistoryRepository emailHistoryRepository;
+    private final EmailHistoryRepository emailHistoryRepository;
 
     public void createEmailHistory(String emailCode, String toEmail) {
         EmailHistoryEntity emailHistoryEntity = new EmailHistoryEntity();
